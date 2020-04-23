@@ -28,9 +28,16 @@ class RegistrationController extends AbstractController
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
+            $rol = $form->get('rol')->getViewData();
+            if($rol == 1){
+                $user->setTipo('ROLE_USER');
+            }
+            if($rol == 0){
+                $user->setTipo('ROLE_AGENT');
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
