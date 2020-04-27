@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -55,9 +57,15 @@ class Usuario implements UserInterface
     private $tipo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\MarcaAutor")
+     * @ORM\OneToMany(targetEntity="App\Entity\MarcaAutor", mappedBy="propietario", orphanRemoval=true)
      */
     private $marcas;
+
+    public function __construct()
+    {
+        $this->marcas = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -200,15 +208,35 @@ class Usuario implements UserInterface
         // TODO: Implement eraseCredentials() method.
     }
 
-    public function getMarcas(): ?MarcaAutor
+    /**
+     * @return Collection|MarcaAutor[]
+     */
+    public function getMarcas(): Collection
     {
         return $this->marcas;
     }
 
-    public function setMarcas(?MarcaAutor $marcas): self
+    public function addMarca(MarcaAutor $marca): self
     {
-        $this->marcas = $marcas;
+        if (!$this->marcas->contains($marca)) {
+            $this->marcas[] = $marca;
+            $marca->setPropietario($this);
+        }
 
         return $this;
     }
+
+    public function removeMarca(MarcaAutor $marca): self
+    {
+        if ($this->marcas->contains($marca)) {
+            $this->marcas->removeElement($marca);
+            // set the owning side to null (unless already changed)
+            if ($marca->getPropietario() === $this) {
+                $marca->setPropietario(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
