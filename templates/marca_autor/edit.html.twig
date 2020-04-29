@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit MarcaAutor{% endblock %}
+
+{% block body %}
+    <h1>Edit MarcaAutor</h1>
+
+    {{ include('marca_autor/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('marca_autor_index') }}">back to list</a>
+
+    {{ include('marca_autor/_delete_form.html.twig') }}
+{% endblock %}

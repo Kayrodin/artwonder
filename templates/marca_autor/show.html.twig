@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MarcaAutor{% endblock %}
+
+{% block body %}
+    <h1>MarcaAutor</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ marca_autor.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ marca_autor.email }}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ marca_autor.telefono }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('marca_autor_index') }}">back to list</a>
+
+    <a href="{{ path('marca_autor_edit', {'id': marca_autor.id}) }}">edit</a>
+
+    {{ include('marca_autor/_delete_form.html.twig') }}
+{% endblock %}

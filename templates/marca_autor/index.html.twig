@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MarcaAutor index{% endblock %}
+
+{% block body %}
+    <h1>Marcas índice</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for marca_autor in marca_autors %}
+            <tr>
+                <td>{{ marca_autor.nombre }}</td>
+                <td>{{ marca_autor.email }}</td>
+                <td>{{ marca_autor.telefono }}</td>
+                <td>
+                    <a href="{{ path('marca_autor_show', {'id': marca_autor.id}) }}">show</a>
+                    <a href="{{ path('marca_autor_edit', {'id': marca_autor.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('marca_autor_new') }}">Create new</a>
+{% endblock %}

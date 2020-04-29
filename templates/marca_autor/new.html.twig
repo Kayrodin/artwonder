@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New MarcaAutor{% endblock %}
+
+{% block body %}
+    <h1>Create new MarcaAutor</h1>
+
+    {{ include('marca_autor/_form.html.twig') }}
+
+    <a href="{{ path('marca_autor_index') }}">back to list</a>
+{% endblock %}
