@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit WondArt{% endblock %}
+
+{% block body %}
+    <h1>Edit WondArt</h1>
+
+    {{ include('wond_art/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('wond_art_index') }}">back to list</a>
+
+    {{ include('wond_art/_delete_form.html.twig') }}
+{% endblock %}

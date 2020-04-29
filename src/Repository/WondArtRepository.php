@@ -19,6 +19,16 @@ class WondArtRepository extends ServiceEntityRepository
         parent::__construct($registry, WondArt::class);
     }
 
+    public function findAllByMy($userId){
+        return $this->createQueryBuilder('w')
+            ->join('w.marcaAutor', 'm')
+            ->andWhere('m.propietario = :user')
+            ->setParameter('user', $userId)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return WondArt[] Returns an array of WondArt objects
     //  */

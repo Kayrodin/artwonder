@@ -19,6 +19,15 @@ class MarcaAutorRepository extends ServiceEntityRepository
         parent::__construct($registry, MarcaAutor::class);
     }
 
+    public function findAllByMy($userId){
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.propietario = :user')
+            ->setParameter('user', $userId)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return MarcaAutor[] Returns an array of MarcaAutor objects
     //  */

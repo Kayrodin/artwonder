@@ -33,7 +33,7 @@ class RegistrationFormType extends AbstractType
                     'Agente' => false,
                 ],
             ])
-            ->add('nombre')
+            ->add('nombre', TextType::class)
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class, [
                 // instead of being set onto the object directly,

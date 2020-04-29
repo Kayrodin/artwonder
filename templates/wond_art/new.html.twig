@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New WondArt{% endblock %}
+
+{% block body %}
+    <h1>Create new WondArt</h1>
+
+    {{ include('wond_art/_form.html.twig') }}
+
+    <a href="{{ path('wond_art_index') }}">back to list</a>
+{% endblock %}

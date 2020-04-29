@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\MarcaAutor;
+use App\Entity\Usuario;
 use App\Form\MarcaAutorType;
 use App\Repository\MarcaAutorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,8 +21,9 @@ class MarcaAutorController extends AbstractController
      */
     public function index(MarcaAutorRepository $marcaAutorRepository): Response
     {
+        $userId = $this->getUser()->getId();
         return $this->render('marca_autor/index.html.twig', [
-            'marca_autors' => $marcaAutorRepository->findAll(),
+            'marca_autors' => $marcaAutorRepository->findAllByMy($userId),
         ]);
     }
 
@@ -35,6 +37,8 @@ class MarcaAutorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $marcaAutor->setPropietario($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($marcaAutor);
             $entityManager->flush();
