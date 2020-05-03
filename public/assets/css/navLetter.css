@@ -1,0 +1,26 @@
+.nav-link{
+    font-family: McLetter;
+    color: black;
+}
+
+.dropdown-item{
+    font-family: McLetter;
+}
+
+.nav-link:hover{
+    color: blue;
+}
+
+#menu-home  ul li:nth-child(1) a{
+    font-weight: bold;
+}
+#menu-login  ul li:nth-child(2) a{
+    font-weight: bold;
+}
+#menu-signup  ul li:nth-child(2) a{
+    font-weight: bold;
+}
+
+.dropdown-menu{
+    left: -60%;
+}

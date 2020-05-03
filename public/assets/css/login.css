@@ -1,0 +1,25 @@
+.container{
+    width: 20%;
+
+    border: 1px solid black;
+    border-radius: 10px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.container h1, label{
+    font-family: McLetter;
+    font-size: 20px;
+}
+
+.container h1{
+    font-size: 28px;
+}
+
+.container .btn{
+    box-shadow: 1px 1px 5px black;
+    margin-bottom: 10px;
+}
+

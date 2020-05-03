@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand shadow-sm">
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <form action="" class="form-inline" method="get" role="search">
+            <div class="form-group">
+                <input type="search" class="form-control border-left-0 border-top-0 border-right-0" name="query"
+                       value="{{ app.request.get('query') }}" required>
+            </div>
+            <button type="submit" class="form-control border-0"><span class="fa fa-search"></span></button>
+        </form>
+        <ul class="navbar-nav ml-auto" id="menu">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('home') }} ">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_login') }}">Log In!</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_register') }}">Sign Up!</a>
+            </li>
+        </ul>
+    </div>
+</nav>

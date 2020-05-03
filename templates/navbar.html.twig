@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand shadow-sm">
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto" id="menu">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('home') }} ">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Profile
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('marca_autor_index') }}">Mis Marcas</a>
+                    <a class="dropdown-item" href="{{ path('wond_art_index') }}">Mis WondArts</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

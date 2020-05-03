@@ -1,0 +1,15 @@
+@font-face {
+    font-family: McLetter;
+    src: url(McLetters.ttf);
+}
+
+#particles-js{
+    position:absolute;
+    width: 100vw;
+    height: 80vh;
+    background-color: #FFFFFF;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    z-index: -1000;
+}
