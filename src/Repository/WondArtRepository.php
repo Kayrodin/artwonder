@@ -29,6 +29,28 @@ class WondArtRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findPageRangeWithSearch($from, $limit, $search){
+        return $this->createQueryBuilder('w')
+            ->andWhere('w.titulo like :search')
+            ->setParameter('search', $search.'%')
+            ->orderBy('w.id', 'ASC')
+            ->setFirstResult($from)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findPageRange($from, $limit){
+        return $this->createQueryBuilder('w')
+            ->orderBy('w.id', 'ASC')
+            ->setFirstResult($from)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return WondArt[] Returns an array of WondArt objects
     //  */

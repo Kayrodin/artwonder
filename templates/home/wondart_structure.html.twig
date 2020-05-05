@@ -1,0 +1,8 @@
+    {% for wondart in wondarts %}
+        <div class="card wondarts" style="width: 18rem;">
+            <img src="{{ asset('uploads/wondarts/' ~ wondart.media) }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ wondart.titulo }}</h5>
+            </div>
+        </div>
+    {% endfor %}

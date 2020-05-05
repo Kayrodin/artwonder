@@ -4,6 +4,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/css/navLetter.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -19,17 +20,21 @@
 
     <br>
 
-    {% for wondart in wondarts %}
-        <div class="card" style="width: 18rem;">
-            <img src="{{ asset('uploads/wondarts/' ~ wondart.media) }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{ wondart.titulo }}</h5>
-            </div>
-        </div>
-    {% endfor %}
+    <div class="container-fluid" id="contenedor_wondarts"></div>
+    <div class="wait"><img id='loadimg' src={{ asset('assets/js/load.gif') }} alt='loading'/> </div>
 
 {% endblock %}
 
 {% block javascripts %}
+    <script>
+        var limit = {{ limit }}
+        {% if search %}
+            var search = "{{ search }}"
+        {% else %}
+            var search = null;
+        {% endif %}
+    </script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script src="{{ asset('assets/js/infinite-scroll.js') }}"></script>
 {% endblock %}
