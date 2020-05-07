@@ -1,0 +1,44 @@
+.container{
+    width: auto;
+
+    border: 1px solid black;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.container h1, label{
+    font-family: McLetter;
+    font-size: 20px;
+}
+
+#registration_form>div{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#registration_form>div label{
+    align-self: end;
+}
+
+#registration_form div:first-child{
+    justify-content: center;
+}
+
+#registration_form div:nth-child(9){
+    justify-content: center;
+}
+
+.container .btn{
+    box-shadow: 1px 1px 5px black;
+    margin-bottom: 10px;
+    margin-right: 3px;
+}
+
+.botones{
+    display: flex;
+    justify-content: center;
+}

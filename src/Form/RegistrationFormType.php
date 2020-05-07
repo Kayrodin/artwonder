@@ -56,7 +56,7 @@ class RegistrationFormType extends AbstractType
                 // this is read and encoded in the controller
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'Contraseña'],
-                'second_options' => ['label' => 'Contraseña repetida'],
+                'second_options' => ['label' => 'Repetida'],
                 'invalid_message' => 'Contraseña repetida inválida',
                 'error_bubbling' => true,
                 'mapped' => false,

@@ -29,7 +29,7 @@
     <script>
         var limit = {{ limit }}
         {% if search %}
-            var search = "{{ search }}"
+            var search = "{{ search }}".toLowerCase()
         {% else %}
             var search = null;
         {% endif %}
@@ -37,4 +37,6 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script src="{{ asset('assets/js/infinite-scroll.js') }}"></script>
+    <script src="{{ asset('assets/js/wondartBehavior.js') }}"></script>
+    <script src="{{ asset('assets/js/homeBehavior.js') }}"></script>
 {% endblock %}

@@ -10,3 +10,39 @@
     transform: translateX(-50%);
     width: 15%;
 }
+
+#contenedor_wondarts{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.wondarts{
+    position: relative;
+    max-width: 400px;
+    margin: 5px;
+}
+
+.wondarts a>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wondarts-body{
+    display: none;
+    margin: 10px;
+    position: absolute;
+    top: 0;
+}
+
+.wondarts-body h1{
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.wondarts-body h2{
+    font-family: McLetter;
+    font-size: 1em;
+    font-weight: bold;
+}

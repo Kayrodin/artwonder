@@ -6,6 +6,7 @@ use App\Entity\WondArt;
 use App\Form\WondArtType;
 use App\Repository\WondArtRepository;
 use App\Service\FileUploader;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class WondArtController extends AbstractController
 {
     /**
+     *  @IsGranted("ROLE_USER")
      * @Route("/", name="wond_art_index", methods={"GET"})
      */
     public function index(WondArtRepository $wondArtRepository): Response
@@ -28,6 +30,7 @@ class WondArtController extends AbstractController
     }
 
     /**
+     *  @IsGranted("ROLE_USER")
      * @Route("/new", name="wond_art_new", methods={"GET","POST"})
      */
     public function new(Request $request, FileUploader $fileUploader): Response
@@ -61,6 +64,7 @@ class WondArtController extends AbstractController
     }
 
     /**
+     *  @IsGranted("ROLE_USER")
      * @Route("/{id}/edit", name="wond_art_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, WondArt $wondArt): Response
@@ -81,6 +85,7 @@ class WondArtController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/{id}", name="wond_art_delete", methods={"DELETE"})
      */
     public function delete(Request $request, WondArt $wondArt): Response

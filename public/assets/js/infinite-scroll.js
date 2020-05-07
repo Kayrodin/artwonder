@@ -37,6 +37,7 @@ function addMoreElementsWithSearch() {
         },
         error: function(data) {
             is_processing = false;
+            alert("Error in async callback");
         }
     });
 }
@@ -59,6 +60,10 @@ function addMoreElements() {
                 last_page = true;
             }
             is_processing = false;
+            if ($(window).scrollBottom() == 0 && scrollStart){
+                addMoreElements();
+                scrollStart = false;
+            }
         },
         error: function(data) {
             is_processing = false;
@@ -67,14 +72,13 @@ function addMoreElements() {
     });
 }
 
+$.fn.scrollBottom = function() {
+    return $(document).height() - this.scrollTop() - this.height();
+};
+
 var start = 0;
-window.onload=()=>{
-    if(search) {
-        addMoreElementsWithSearch();
-    }else{
-        addMoreElements();
-    }
-}
+var scrollStart = true;
+
 
 //Este es el prototipo
 

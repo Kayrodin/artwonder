@@ -1,16 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Registro{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/navLetter.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
 
-    {{ form_start(registrationForm) }}
-    {{ form_widget(registrationForm) }}
-    <button class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div id="menu-register">
+            {% include 'navbar.html.twig' %}
+        </div>
+    {% else %}
+        <div id="menu-register">
+            {% include 'navbar_anon.html.twig' %}
+        </div>
+    {% endif %}
+
+    <div id="particles-js"></div>
+    <div class="container">
+        {{ form_start(registrationForm) }}
+        {{ form_widget(registrationForm) }}
+        <div class="botones">
+            <button class="btn">Aceptar</button>
+            <button class="btn" type="reset">Resetear</button>
+        </div>
+        {{ form_end(registrationForm) }}
+    </div>
+
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('assets/js/registerBehavior.js') }}"></script>
+    <script src="{{ asset('assets/js/particles.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
 {% endblock %}

@@ -18,12 +18,14 @@ tipo.change(function () {
 
 function ocultar() {
     if(tipo.val() == 1){
+        $(".container").css("top","25%");
         agent.hide();
         agent.prop('required', false);
     }
 }
 function mostrar() {
     if(tipo.val() == 0){
+        $(".container").css("top","18%");
         agent.show();
         agent.prop('required', true);
     }

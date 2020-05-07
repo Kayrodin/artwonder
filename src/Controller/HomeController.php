@@ -26,7 +26,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/api/home/{from}/{limit}/{search}", name="get_wondarts_search", options={"expose"=true}, methods={"GET","POST"})
+     * @Route("/api/home/{from}/{limit}/{search}", name="get_wondarts_search", options={"expose"=true}, methods={"GET","POST"}), requirements={"from"="\d+", "limit"="\d+", "search"="[a-b ]+"}
      * @param Request $request
      * @return JsonResponse
      */
