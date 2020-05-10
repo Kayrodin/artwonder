@@ -1,10 +1,6 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}Edit MarcaAutor{% endblock %}
+<h1>Edit MarcaAutor</h1>
 
-{% block body %}
-    <h1>Edit MarcaAutor</h1>
+{{ include('marca_autor/_form.html.twig', {'button_label': 'Actualizar'}) }}
 
-    {{ include('marca_autor/_form.html.twig', {'button_label': 'Actualizar'}) }}
 
-{% endblock %}

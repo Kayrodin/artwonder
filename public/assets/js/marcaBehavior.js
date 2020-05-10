@@ -38,12 +38,12 @@ $(document).on('click', function (event) {
     content1 = $('#form-new');
     content2 = $('#form-edit');
 
-    if(!content1.is(event.target) && !$.contains(content1[0],event.target)){
+    if(!content1.is(event.target) && !$.contains(content1[0],event.target) && event.target.id != 'new'){
         content1.animate({
             right:'-300px',
         }, 500).hide(500);
     }
-    if(!content2.is(event.target) && !$.contains(content2[0],event.target)){
+    if(!content2.is(event.target) && !$.contains(content2[0],event.target) && event.target.classList[0] != 'edit'){
         content2.animate({
             right:'-300px',
         }, 500).hide(500);
