@@ -18,7 +18,7 @@ class HomeController extends AbstractController
     {
         $searchQuery = $request->get('query');
 
-        $limit = 2;
+        $limit = 10;
         return $this->render('home/index.html.twig', [
             'limit'=> $limit,
             'search' => $searchQuery,
@@ -61,24 +61,23 @@ class HomeController extends AbstractController
      */
     public function getWondarts(Request $request): JsonResponse
     {
-        $stopwatch = new Stopwatch();
-        $stopwatch->start('llamada');
+        //$stopwatch = new Stopwatch();
+        //$stopwatch->start('prueba');
         $from = $request->get('from');
         $limit = $request->get('limit');
-        $search = $request->get('search');
         $wondarts = $this->getDoctrine()->getRepository(WondArt::class)->findPageRange($from, $limit);
         $islastpage = (count($wondarts)==0);
         $response = $this->render('home/wondart_structure.html.twig', [
             'wondarts' => $wondarts,
         ]);
-
+        //$stopwatch->lap('prueba');
+        //$event = $stopwatch->stop('prueba');
         $response = array(
             "code" => 200,
             "lastpage" => $islastpage,
             "html" => $this->render('home/wondart_structure.html.twig', [
                 'wondarts' => $wondarts
             ])->getContent() );
-        $event = $stopwatch->stop('llamada')->getDuration();
         return new JsonResponse($response);
     }
 }

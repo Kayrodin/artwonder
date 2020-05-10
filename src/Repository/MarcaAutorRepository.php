@@ -20,13 +20,21 @@ class MarcaAutorRepository extends ServiceEntityRepository
     }
 
     public function findAllByMy($userId){
+    return $this->createQueryBuilder('m')
+        ->andWhere('m.propietario = :user')
+        ->setParameter('user', $userId)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
+    public function findMySigns($userId){
         return $this->createQueryBuilder('m')
             ->andWhere('m.propietario = :user')
             ->setParameter('user', $userId)
-            ->getQuery()
-            ->getResult()
             ;
     }
+
 
     // /**
     //  * @return MarcaAutor[] Returns an array of MarcaAutor objects

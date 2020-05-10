@@ -6,10 +6,13 @@ use App\Entity\MarcaAutor;
 use App\Entity\Usuario;
 use App\Form\MarcaAutorType;
 use App\Repository\MarcaAutorRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/marca")
@@ -17,7 +20,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class MarcaAutorController extends AbstractController
 {
     /**
-     * @Route("/", name="marca_autor_index", methods={"GET"})
+     * @IsGranted("ROLE_USER")
+     * @Route("/", name="marca_autor_index", methods={"GET","POST"})
      */
     public function index(MarcaAutorRepository $marcaAutorRepository): Response
     {
@@ -28,17 +32,24 @@ class MarcaAutorController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="marca_autor_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
+     * @Route("/api/new", name="marca_autor_new",  options={"expose"=true}, methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new_api(Request $request)
     {
         $marcaAutor = new MarcaAutor();
-        $form = $this->createForm(MarcaAutorType::class, $marcaAutor);
+
+        $user = $this->getUser();
+        if (!$user instanceof Usuario) {
+            throw new AccessDeniedException("Usuario, no autorizado");
+        }
+        $form = $this->createForm(MarcaAutorType::class, $marcaAutor, array(
+            'action' => $this->generateUrl('marca_autor_new')));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $this->getUser();
             $marcaAutor->setPropietario($user);
+            $marcaAutor->setNombre(strtoupper($marcaAutor->getNombre()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($marcaAutor);
             $entityManager->flush();
@@ -46,10 +57,14 @@ class MarcaAutorController extends AbstractController
             return $this->redirectToRoute('marca_autor_index');
         }
 
-        return $this->render('marca_autor/new.html.twig', [
-            'marca_autor' => $marcaAutor,
-            'form' => $form->createView(),
-        ]);
+        $response = array(
+            "code" => 200,
+            "html" =>  $this->render('marca_autor/new.html.twig', [
+                'marca_autor' => $marcaAutor,
+                'form' => $form->createView(),
+            ])->getContent());
+
+        return new JsonResponse($response);
     }
 
     /**
@@ -63,26 +78,44 @@ class MarcaAutorController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="marca_autor_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
+     * @Route("/api/edit/{id}", name="marca_autor_edit",  options={"expose"=true}, methods={"GET","POST"})
      */
-    public function edit(Request $request, MarcaAutor $marcaAutor): Response
+    public function edit(Request $request, MarcaAutor $marcaAutor)
     {
-        $form = $this->createForm(MarcaAutorType::class, $marcaAutor);
+        $id = $request->get('id');
+        $brandOwner = $this->getDoctrine()->getRepository(MarcaAutor::class)->find($id)->getPropietario();
+        $user = $this->getUser();
+        if (!$user instanceof Usuario) {
+            throw new AccessDeniedException("Usuario, no autorizado");
+        }
+        if ($user->getId() != $brandOwner->getId()) {
+            throw new AccessDeniedException("Usuario, no autorizado");
+        }
+
+        $form = $this->createForm(MarcaAutorType::class, $marcaAutor, array(
+            'action' => $this->generateUrl('marca_autor_edit',  array('id' => $id))));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('marca_autor_index');
         }
 
-        return $this->render('marca_autor/edit.html.twig', [
-            'marca_autor' => $marcaAutor,
-            'form' => $form->createView(),
-        ]);
+        $response = array(
+            "code" => 200,
+            "html" => $this->render('marca_autor/edit.html.twig', [
+                'marca_autor' => $marcaAutor,
+                'form' => $form->createView(),
+            ])->getContent());
+
+        return new JsonResponse($response);
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/{id}", name="marca_autor_delete", methods={"DELETE"})
      */
     public function delete(Request $request, MarcaAutor $marcaAutor): Response

@@ -37,7 +37,8 @@ function addMoreElementsWithSearch() {
         },
         error: function(data) {
             is_processing = false;
-            alert("Error in async callback");
+            console.log("Error in async callback");
+            alert("Tiempo de espera excedido");
         }
     });
 }
@@ -67,7 +68,8 @@ function addMoreElements() {
         },
         error: function(data) {
             is_processing = false;
-            alert("Error in async callback");
+            console.log("Error in async callback");
+            alert("Tiempo de espera excedido");
         }
     });
 }

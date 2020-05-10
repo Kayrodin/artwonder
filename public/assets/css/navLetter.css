@@ -5,6 +5,7 @@
 
 .dropdown-item{
     font-family: McLetter;
+    font-size: calc(0.5em + 1vw);
 }
 
 .nav-link:hover{
@@ -23,4 +24,14 @@
 
 .dropdown-menu{
     left: -60%;
+}
+
+@font-face {
+    font-family: McLetter;
+    src: url(McLetters.ttf);
+}
+
+.navbar{
+    z-index: 100 !important;
+    font-size: calc(0.5em + 1vw);
 }

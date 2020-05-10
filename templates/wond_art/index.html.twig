@@ -2,38 +2,52 @@
 
 {% block title %}Art Wonder{% endblock %}
 
-{% block body %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titulo</th>
-                <th>Media</th>
-                <th>Historia</th>
-                <th>Etiquetas</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for wond_art in wond_arts %}
-            <tr>
-                <td>{{ wond_art.id }}</td>
-                <td>{{ wond_art.titulo }}</td>
-                <td>{{ wond_art.media }}</td>
-                <td>{{ wond_art.historia }}</td>
-                <td>{{ wond_art.etiquetas }}</td>
-                <td>
-                    <a href="{{ path('wond_art_show', {'id': wond_art.id}) }}">show</a>
-                    <a href="{{ path('wond_art_edit', {'id': wond_art.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/wondart.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/navLetter.css') }}">
+{% endblock %}
 
-    <a href="{{ path('wond_art_new') }}">Create new</a>
+{% block body %}
+
+    <div>
+        {% include 'navbar.html.twig' %}
+    </div>
+
+    <div class="contenedor">
+        <div class="index-block">
+            <h1>Wondarts</h1>
+            <div id="controles">
+                <button class="btn btn-lg" id="new">Nuevo Wondart</button>
+            </div>
+
+            <table class="table">
+                <tbody>
+                {% for wond_art in wond_arts %}
+                    <tr>
+                        <td class="wondname">{{ wond_art.titulo }}</td>
+                        <td>
+                            <a class="btn" role="button" href="{{ path('wond_art_show', {'id': wond_art.id}) }}">show</a>
+                            <button class="edit btn" data-id="{{ wond_art.id }}">Editar</button>
+                            {{ include('wond_art/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="2">No tienes wondarts</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>
+        <div class="form-block" id="form-new"></div>
+        <div class="form-block" id="form-edit"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('assets/js/wondartBehavior.js') }}"></script>
 {% endblock %}

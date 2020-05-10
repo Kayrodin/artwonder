@@ -2,15 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Comentario;
+use App\Entity\MarcaAutor;
+use App\Entity\Usuario;
 use App\Entity\WondArt;
 use App\Form\WondArtType;
 use App\Repository\WondArtRepository;
 use App\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/wondart")
@@ -18,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class WondArtController extends AbstractController
 {
     /**
-     *  @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_USER")
      * @Route("/", name="wond_art_index", methods={"GET"})
      */
     public function index(WondArtRepository $wondArtRepository): Response
@@ -31,26 +36,45 @@ class WondArtController extends AbstractController
 
     /**
      *  @IsGranted("ROLE_USER")
-     * @Route("/new", name="wond_art_new", methods={"GET","POST"})
+     * @Route("/api/new", name="wond_art_new",  options={"expose"=true}, methods={"GET","POST"})
      */
-    public function new(Request $request, FileUploader $fileUploader): Response
+    public function new(Request $request, FileUploader $fileUploader)
     {
+
         $wondArt = new WondArt();
-        $form = $this->createForm(WondArtType::class, $wondArt);
+        $user = $this->getUser();
+        if (!$user instanceof Usuario) {
+            throw new AccessDeniedException("Usuario, no autorizado");
+        }
+
+        $form = $this->createForm(WondArtType::class, $wondArt, array(
+            'action' => $this->generateUrl('wond_art_new')));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $wondArt->setMedia($fileUploader->upload($form['media']->getData()));
+            //Securiza la creación de wondarts
+            $marcaAutorId = $wondArt->getMarcaAutor()->getId();
+            $brandOwnerId = $this->getDoctrine()->getRepository(MarcaAutor::class)->find($marcaAutorId)->getPropietario()->getId();
+            if($brandOwnerId != $user->getId()){
+                throw new AccessDeniedException("Usuario, no autorizado");
+            }
+
+            $wondArt->setMedia($fileUploader->upload($form['media']->getData()));//sube la imagen
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($wondArt);
             $entityManager->flush();
             return $this->redirectToRoute('wond_art_index');
         }
 
-        return $this->render('wond_art/new.html.twig', [
-            'wond_art' => $wondArt,
-            'form' => $form->createView(),
-        ]);
+        $response = array(
+            "code" => 200,
+            "html" => $this->render('wond_art/new.html.twig', [
+                'wond_art' => $wondArt,
+                'form' => $form->createView(),
+            ])->getContent());
+
+        return new JsonResponse($response);
     }
 
     /**
@@ -65,11 +89,15 @@ class WondArtController extends AbstractController
 
     /**
      *  @IsGranted("ROLE_USER")
-     * @Route("/{id}/edit", name="wond_art_edit", methods={"GET","POST"})
+     * @Route("/api/edit/{id}", name="wond_art_edit", options={"expose"=true}, methods={"GET","POST"})
      */
-    public function edit(Request $request, WondArt $wondArt): Response
+    public function edit(Request $request, WondArt $wondArt)
     {
-        $form = $this->createForm(WondArtType::class, $wondArt);
+        $id = $request->get('id');
+
+        $form = $this->createForm(WondArtType::class, $wondArt,  array(
+            'action' => $this->generateUrl('wond_art_edit',  array('id' => $id)),
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -78,10 +106,14 @@ class WondArtController extends AbstractController
             return $this->redirectToRoute('wond_art_index');
         }
 
-        return $this->render('wond_art/edit.html.twig', [
-            'wond_art' => $wondArt,
-            'form' => $form->createView(),
-        ]);
+        $response = array(
+            "code" => 200,
+            "html" =>  $this->render('wond_art/edit.html.twig', [
+                'wond_art' => $wondArt,
+                'form' => $form->createView(),
+            ])->getContent());
+
+        return new JsonResponse($response);
     }
 
     /**

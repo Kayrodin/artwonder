@@ -2,7 +2,7 @@ $('#new').click(function () {
     $.ajax({
         type: "GET",
         //FOS Routing
-        url: Routing.generate('wond_art_new'),
+        url: Routing.generate('marca_autor_new'),
         success: function(response) {
             $('#form-new').html(response.html);
             $('#form-new').show().animate({
@@ -20,7 +20,7 @@ $('.edit').on('click', function (e) {
     $.ajax({
         type: "GET",
         //FOS Routing
-        url: Routing.generate('wond_art_edit',  {'id': $(this).attr('data-id')}),
+        url: Routing.generate('marca_autor_edit',  {'id': $(this).attr('data-id')}),
         success: function(response) {
             $('#form-edit').html(response.html);
             $('#form-edit').show().animate({
@@ -49,4 +49,3 @@ $(document).on('click', function (event) {
         }, 500).hide(500);
     }
 })
-

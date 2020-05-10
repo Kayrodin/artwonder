@@ -1,0 +1,30 @@
+.titulo{
+    width: 100%;
+    text-align: center;
+    font-family: McLetter;
+    margin: 10px;
+}
+
+.media{
+    width: 100%;
+}
+
+.media>a{
+    text-align: center;
+    margin: auto;
+}
+
+.media>a>img{
+    width: 50%;
+}
+
+.historia{
+    width: 100%;
+    text-align: center;
+    margin: 10px;
+}
+
+#disqus_thread{
+    width: 90%;
+    margin: auto;
+}

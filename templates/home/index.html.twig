@@ -21,7 +21,7 @@
     <br>
 
     <div class="container-fluid" id="contenedor_wondarts"></div>
-    <div class="wait"><img id='loadimg' src={{ asset('assets/js/load.gif') }} alt='loading'/> </div>
+    <div class="wait"><img class="img-fluid" id='loadimg' src={{ asset('assets/js/load.gif') }} alt='loading'/> </div>
 
 {% endblock %}
 
@@ -34,6 +34,7 @@
             var search = null;
         {% endif %}
     </script>
+    <script type="text/javascript" src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script src="{{ asset('assets/js/infinite-scroll.js') }}"></script>

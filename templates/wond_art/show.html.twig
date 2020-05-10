@@ -2,33 +2,70 @@
 
 {% block title %}WondArt{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/navLetter.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/wondartShow.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/lightbox2-2.11.1/dist/css/lightbox.min.css') }}">
+{% endblock %}
+
 {% block body %}
-    <h1>WondArt</h1>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div>
+            {% include 'navbar.html.twig' %}
+        </div>
+    {% else %}
+        <div>
+            {% include 'navbar_anon.html.twig' %}
+        </div>
+    {% endif %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Titulo</th>
-                <td>{{ wond_art.titulo }}</td>
-            </tr>
-            <tr>
-                <th>Media</th>
-                <td><img src="{{ asset('uploads/wondarts/' ~ wond_art.media) }}" alt="No se ha podido cargar la imagen"></td>
-            </tr>
-            <tr>
-                <th>Historia</th>
-                <td>{{ wond_art.historia }}</td>
-            </tr>
-            <tr>
-                <th>Etiquetas</th>
-                <td>{{ wond_art.etiquetas }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h1 class="titulo">{{ wond_art.titulo }}</h1>
+    <div class="media">
+        <a href="{{ asset('uploads/wondarts/' ~ wond_art.media) }}" data-lightbox="roadtrip" data-title="{{ wond_art.titulo }}">
+            <img class="img-fluid" src="{{ asset('uploads/wondarts/' ~ wond_art.media) }}" alt="No se ha podido cargar la imagen">
+        </a>
+    </div>
 
-    <a href="{{ path('wond_art_index') }}">back to list</a>
+    <p class="historia">{{ wond_art.historia }}</p>
 
-    <a href="{{ path('wond_art_edit', {'id': wond_art.id}) }}">edit</a>
+{#    <a href="{{ path('wond_art_index') }}">back to list</a>#}
 
-    {{ include('wond_art/_delete_form.html.twig') }}
+{#    <a href="{{ path('wond_art_edit', {'id': wond_art.id}) }}">edit</a>#}
+
+{#    {{ include('wond_art/_delete_form.html.twig') }}#}
+
+    <div id="disqus_thread"></div>
+
+    <script id="dsq-count-scr" src="//artwonder.disqus.com/count.js" async></script>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+        var disqus_config = function () {
+        this.page.url = 'http://127.0.0.1:8000/'+'{{ path('wond_art_show',  {'id': wond_art.id}) }}';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = {{ wond_art.id }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        var disqus_developer = 1;
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://artwonder.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+        /*Append #disqus_thread to the href attribute in your links. This will tell Disqus which
+         links to look up and return the comment count. For example: <a href="http://foo.com/bar.html#disqus_thread">Link</a>.*/
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    <script src="{{ asset('assets/lightbox2-2.11.1/dist/js/lightbox.min.js') }}"></script>
+
 {% endblock %}
