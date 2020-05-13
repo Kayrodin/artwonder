@@ -1,10 +1,10 @@
     {% for wondart in wondarts %}
         <div class="wondarts">
             <a href="{{ path('wond_art_show', { 'id': wondart.id }) }}">
-                <img src="{{ asset('uploads/wondarts/' ~ wondart.media) }}" class="card-img-top" alt="...">
+                <img src="{{ asset('uploads/wondarts/' ~ wondart.media ) | imagine_filter('water_mark')}}" alt="...">
                 <div class="wondarts-body">
-                    <h1 class="title">{{ wondart.titulo }}</h1>
-                    <h2 class="autor">By {{ wondart.marcaAutor.nombre }}</h2>
+                    <h1>{{ wondart.titulo }}</h1>
+                    <h2>Por {{ wondart.marcaAutor.nombre }}</h2>
                 </div>
             </a>
         </div>

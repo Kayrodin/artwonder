@@ -26,7 +26,8 @@
                     <tr>
                         <td class="wondname">{{ wond_art.titulo }}</td>
                         <td>
-                            <a class="btn" role="button" href="{{ path('wond_art_show', {'id': wond_art.id}) }}">show</a>
+                            {{ include('wond_art/_post_form.html.twig') }}
+                            <a class="btn" role="button" href="{{ path('wond_art_show', {'id': wond_art.id}) }}">Mostrar</a>
                             <button class="edit btn" data-id="{{ wond_art.id }}">Editar</button>
                             {{ include('wond_art/_delete_form.html.twig') }}
                         </td>

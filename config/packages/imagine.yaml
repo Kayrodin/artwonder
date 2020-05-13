@@ -1,0 +1,28 @@
+liip_imagine:
+
+  resolvers:
+    default:
+      web_path: ~
+
+  filter_sets:
+    cache: ~
+
+    water_mark:
+      filters:
+        watermark_image:
+          image: public/uploads/logo/logoopaco.png
+          size: 0.5
+          position: bottomright
+        relative_resize:
+          heighten: 300
+
+    my_thumb:
+      filters:
+        watermark_image:
+          image: public/uploads/logo/logoopaco.png
+          size: 0.5
+          position: bottomright
+        thumbnail:
+          size: [1200, 800]
+          mode: inset
+          allow_upscale: true

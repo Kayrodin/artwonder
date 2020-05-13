@@ -65,8 +65,10 @@ class WondArtType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('historia', TextareaType::class)
-//            ->add('etiquetas')
+            ->add('historia', TextareaType::class, [
+                'required'=>false,
+            ])
+
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event){
                 $userId = $this->security->getUser()->getId();
                 $form = $event->getForm();

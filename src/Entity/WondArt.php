@@ -49,6 +49,11 @@ class WondArt
      */
     private $comentarios;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $publicado;
+
     public function __construct()
     {
         $this->comentarios = new ArrayCollection();
@@ -146,6 +151,18 @@ class WondArt
                 $comentario->setWondArtComentado(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPublicado(): ?bool
+    {
+        return $this->publicado;
+    }
+
+    public function setPublicado(bool $publicado): self
+    {
+        $this->publicado = $publicado;
 
         return $this;
     }

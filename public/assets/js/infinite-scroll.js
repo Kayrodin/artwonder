@@ -25,7 +25,7 @@ function addMoreElementsWithSearch() {
         url: Routing.generate('get_wondarts_search', {'from': start, 'limit': limit, 'search': search }),
         success: function(response) {
             $('.wait').hide();
-            if (response.html.length > 0) {
+            if ((response.html).trim().length > 0) {
                 $('#contenedor_wondarts').append(response.html);
                 start += limit;
                 //The server can answer saying it's the last page so that the browser doesn't make anymore calls
@@ -52,7 +52,7 @@ function addMoreElements() {
         url: Routing.generate('get_wondarts', {'from': start, 'limit': limit}),
         success: function(response) {
             $('.wait').hide();
-            if (response.html.length > 0) {
+            if ((response.html).trim().length > 0) {
                 $('#contenedor_wondarts').append(response.html);
                 start += limit;
                 //The server can answer saying it's the last page so that the browser doesn't make anymore calls

@@ -65,6 +65,7 @@ class HomeController extends AbstractController
         //$stopwatch->start('prueba');
         $from = $request->get('from');
         $limit = $request->get('limit');
+
         $wondarts = $this->getDoctrine()->getRepository(WondArt::class)->findPageRange($from, $limit);
         $islastpage = (count($wondarts)==0);
         $response = $this->render('home/wondart_structure.html.twig', [

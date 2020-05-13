@@ -14,7 +14,7 @@
 #contenedor_wondarts{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .wondarts{
@@ -29,20 +29,42 @@
     object-fit: cover;
 }
 
+.wondarts:hover a>img{
+    filter: blur(2px) brightness(60%);
+}
+
+.wondarts:hover .wondarts-body{
+    display: flex;
+}
+
 .wondarts-body{
     display: none;
     margin: 10px;
     position: absolute;
     top: 0;
+    color: #FFFFFF;
+    height: 90%;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .wondarts-body h1{
+    font-family: McLetter;
     font-size: 2em;
     font-weight: bold;
+    text-shadow: 0 0 3px black;
 }
 
 .wondarts-body h2{
     font-family: McLetter;
     font-size: 1em;
     font-weight: bold;
+    text-shadow: 0 0 3px black;
+}
+
+#particles-js{
+    position: fixed;
+    z-index: -1;
+    height: 100%;
+    overflow: auto;
 }

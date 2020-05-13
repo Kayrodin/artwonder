@@ -35,3 +35,7 @@
     z-index: 100 !important;
     font-size: calc(0.5em + 1vw);
 }
+
+.catlogo{
+    width: 80px;
+}

@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('wond_art_post', {'id': wond_art.id}) }}">
+    <input type="hidden" name="_method" value="PUBLIC">
+    <input type="hidden" name="_token" value="{{ csrf_token('post' ~ wond_art.id) }}">
+    <button class="btn">Publicar</button>
+</form>

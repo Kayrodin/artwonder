@@ -17,10 +17,10 @@
             {% include 'navbar_home_anon.html.twig' %}
         </div>
     {% endif %}
-
+    <div id="particles-js"></div>
     <br>
 
-    <div class="container-fluid" id="contenedor_wondarts"></div>
+    <div class="container" id="contenedor_wondarts"></div>
     <div class="wait"><img class="img-fluid" id='loadimg' src={{ asset('assets/js/load.gif') }} alt='loading'/> </div>
 
 {% endblock %}
@@ -40,4 +40,6 @@
     <script src="{{ asset('assets/js/infinite-scroll.js') }}"></script>
     <script src="{{ asset('assets/js/wondartBehavior.js') }}"></script>
     <script src="{{ asset('assets/js/homeBehavior.js') }}"></script>
+    <script src="{{ asset('assets/js/particles.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
 {% endblock %}
