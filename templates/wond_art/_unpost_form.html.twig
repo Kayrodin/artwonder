@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('wond_art_depost', {'id': wond_art.id}) }}">
+    <input type="hidden" name="_method" value="UNPUBLIC">
+    <input type="hidden" name="_token" value="{{ csrf_token('depost' ~ wond_art.id) }}">
+    <button class="btn">Privatizar</button>
+</form>
+

@@ -26,7 +26,11 @@
                     <tr>
                         <td class="wondname">{{ wond_art.titulo }}</td>
                         <td>
-                            {{ include('wond_art/_post_form.html.twig') }}
+                            {% if wond_art.publicado %}
+                                {{ include('wond_art/_unpost_form.html.twig') }}
+                            {% else %}
+                                {{ include('wond_art/_post_form.html.twig') }}
+                            {% endif %}
                             <a class="btn" role="button" href="{{ path('wond_art_show', {'id': wond_art.id}) }}">Mostrar</a>
                             <button class="edit btn" data-id="{{ wond_art.id }}">Editar</button>
                             {{ include('wond_art/_delete_form.html.twig') }}
@@ -39,7 +43,6 @@
                 {% endfor %}
                 </tbody>
             </table>
-
 
         </div>
         <div class="form-block" id="form-new"></div>

@@ -33,8 +33,12 @@ class RegistrationFormType extends AbstractType
                     'Agente' => false,
                 ],
             ])
-            ->add('nombre', TextType::class)
-            ->add('email', EmailType::class)
+            ->add('nombre', TextType::class,[
+                'label' => 'Nombre',
+            ])
+            ->add('email', EmailType::class,[
+                'label' => 'Correo',
+            ])
             ->add('password', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -102,6 +106,7 @@ class RegistrationFormType extends AbstractType
                     ]
                 ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'Acepto los términos',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([

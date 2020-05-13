@@ -42,7 +42,6 @@ class WondArtController extends AbstractController
      */
     public function new(Request $request, FileUploader $fileUploader)
     {
-
         $wondArt = new WondArt();
         $user = $this->getUser();
         if (!$user instanceof Usuario) {
@@ -85,8 +84,16 @@ class WondArtController extends AbstractController
      */
     public function show(WondArt $wondArt): Response
     {
+        $isOwner = false;
+        if ($this->getUser()){
+            $userId = $this->getUser()->getId();
+            $marcaOwner = $wondArt->getMarcaAutor()->getPropietario()->getId();
+            $isOwner = ($userId == $marcaOwner);
+        }
+
         return $this->render('wond_art/show.html.twig', [
             'wond_art' => $wondArt,
+            'isOwner' => $isOwner,
         ]);
     }
 
@@ -94,7 +101,7 @@ class WondArtController extends AbstractController
      *  @IsGranted("ROLE_USER")
      * @Route("/api/edit/{id}", name="wond_art_edit", options={"expose"=true}, methods={"GET","POST"})
      */
-    public function edit(Request $request, WondArt $wondArt, CacheManager $cacheManager)
+    public function edit(Request $request, WondArt $wondArt, FileUploader $fileUploader)
     {
         $id = $request->get('id');
         $form = $this->createForm(WondArtType::class, $wondArt,  array(
@@ -103,6 +110,7 @@ class WondArtController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $wondArt->setMedia($fileUploader->upload($form['media']->getData()));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('wond_art_index');
@@ -122,12 +130,27 @@ class WondArtController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/post/{id}", name="wond_art_post", methods={"PUBLIC"})
      */
-    public function post(Request $request, WondArt $wondArt, Publicator $publicator, FileUploader $fileUploader): Response
+    public function post(Request $request, WondArt $wondArt): Response
     {
         if ($this->isCsrfTokenValid('post'.$wondArt->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             //$newImg = $publicator->toPost($fileUploader->getTargetDirectory().'/'.$wondArt->getMedia());
             $wondArt->setPublicado(true);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('wond_art_index');
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     * @Route("/depost/{id}", name="wond_art_depost", methods={"UNPUBLIC"})
+     */
+    public function depost(Request $request, WondArt $wondArt): Response
+    {
+        if ($this->isCsrfTokenValid('depost'.$wondArt->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $wondArt->setPublicado(false);
             $entityManager->flush();
         }
 

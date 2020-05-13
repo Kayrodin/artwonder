@@ -21,10 +21,20 @@
 
     <div class="lateral my-3">
         <div class="media">
-            <a href="{{ asset('uploads/wondarts/' ~ wond_art.media)  | imagine_filter('my_thumb') }}" data-lightbox="roadtrip" data-title="{{ wond_art.titulo }}">
-                <img class="img-fluid" src="{{ asset('uploads/wondarts/' ~ wond_art.media) | imagine_filter('my_thumb') }}"
-                     alt="No se ha podido cargar la imagen">
-            </a>
+            {% if isOwner %}
+                <a href="{{ asset('uploads/wondarts/' ~ wond_art.media) }}" data-lightbox="roadtrip" data-title="{{ wond_art.titulo }}">
+                    <img class="img-fluid" src="{{ asset('uploads/wondarts/' ~ wond_art.media) }}"
+                         alt="No se ha podido cargar la imagen">
+                </a>
+            {% elseif wond_art.publicado %}
+                <a href="{{ asset('uploads/wondarts/' ~ wond_art.media)  | imagine_filter('my_thumb') }}" data-lightbox="roadtrip" data-title="{{ wond_art.titulo }}">
+                    <img class="img-fluid" src="{{ asset('uploads/wondarts/' ~ wond_art.media) | imagine_filter('my_thumb') }}"
+                         alt="No se ha podido cargar la imagen">
+                </a>
+            {% else %}
+               //redirect to another twig
+                {{ include('error404.html.twig') }}
+            {% endif %}
         </div>
         <div class="infomacion">
             <h1 class="titulo">{{ wond_art.titulo }}</h1>
@@ -45,11 +55,13 @@
 
     <div id="disqus_thread"></div>
 
+
     <script id="dsq-count-scr" src="//artwonder.disqus.com/count.js" async></script>
 
 {% endblock %}
 
 {% block javascripts %}
+    {% if wond_art.publicado %}
     <script>
 
         /**
@@ -75,6 +87,7 @@
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
+    {% endif %}
     <script src="{{ asset('assets/lightbox2-2.11.1/dist/js/lightbox.min.js') }}"></script>
 
 {% endblock %}
