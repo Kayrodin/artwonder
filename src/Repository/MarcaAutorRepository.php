@@ -31,6 +31,7 @@ class MarcaAutorRepository extends ServiceEntityRepository
     public function findMySigns($userId){
         return $this->createQueryBuilder('m')
             ->andWhere('m.propietario = :user')
+            ->orWhere('m.id = 1')
             ->setParameter('user', $userId)
             ;
     }

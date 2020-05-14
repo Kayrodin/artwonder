@@ -81,9 +81,9 @@ class WondArtType extends AbstractType
                     }
                 ];
                 $results = $this->autorRepository->findAllByMy($userId);
-                if(!empty($results)){
-                    $form->add('marcaAutor', EntityType::class, $formOptions);
-                }
+
+                $form->add('marcaAutor', EntityType::class, $formOptions);
+
             })
         ;
     }

@@ -8,17 +8,21 @@
             </div>
             <button type="submit" class="form-control border-0"><span class="fa fa-search"></span></button>
         </form>
-        <ul class="navbar-nav ml-auto" id="menu">
+        <ul class="navbar-nav" id="home">
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('home') }} ">Inicio</a>
+                <a class="nav-link" id="inicio" href="{{ path('home') }} ">Inicio</a>
             </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" id="menu">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Perfil
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ path('marca_autor_index') }}">Mis Marcas</a>
-                    <a class="dropdown-item" href="{{ path('wond_art_index') }}">Mis WondArts</a>
+                    {% if is_granted('ROLE_USER') %}
+                        <a class="dropdown-item" href="{{ path('marca_autor_index') }}">Mis Marcas</a>
+                        <a class="dropdown-item" href="{{ path('wond_art_index') }}">Mis WondArts</a>
+                    {% endif %}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ path('app_logout') }}">Salir</a>
                 </div>
