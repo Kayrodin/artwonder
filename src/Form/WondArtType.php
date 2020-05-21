@@ -47,9 +47,10 @@ class WondArtType extends AbstractType
             ->add('titulo', TextType::class, [
                 'required' => true,
             ])
+
             ->add('media', FileType::class, [
                 'required' => true,
-                "data_class" => null,   //no restringe el tipo de dato que le llega en el ajax
+                'data_class' => null,   //no restringe el tipo de dato que le llega en el ajax
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',

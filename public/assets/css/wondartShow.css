@@ -41,3 +41,8 @@
 .historia{
     max-width: 40%;
 }
+
+.btn{
+    box-shadow: 1px 1px 5px black;
+    margin-top: 10px;
+}

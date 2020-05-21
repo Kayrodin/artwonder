@@ -1,9 +1,6 @@
+<div class="form-group">
+    <h1>Edit WondArt</h1>
 
-<h1>Edit WondArt</h1>
+    {{ include('wond_art/_form.html.twig', {'button_label': 'Actualizar'}) }}
 
-{{ include('wond_art/_form.html.twig', {'button_label': 'Update'}) }}
-
-<a href="{{ path('wond_art_index') }}">back to list</a>
-
-{{ include('wond_art/_delete_form.html.twig') }}
-
+</div>

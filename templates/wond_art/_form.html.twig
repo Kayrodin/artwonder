@@ -1,4 +1,16 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    {{ form_row(form.titulo) }}
+    {{ form_row(form.media)}}
+    {{ form_row(form.historia) }}
+    {{ form_row(form.marcaAutor) }}
+
+    <div class="acciones">
+        <button class="btn">{{ button_label|default('Crear') }}</button>
+    </div>
+
 {{ form_end(form) }}

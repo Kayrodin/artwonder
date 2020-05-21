@@ -23,11 +23,11 @@
         <div class="media">
             {% if isOwner %}
                 <a href="{{ asset('uploads/wondarts/' ~ wond_art.media) }}" data-lightbox="roadtrip" data-title="{{ wond_art.titulo }}">
-                    <img class="img-fluid" src="{{ asset('uploads/wondarts/' ~ wond_art.media) }}"
+                    <img class="img-fluid" src="{{ asset('uploads/wondarts/' ~ wond_art.media) | imagine_filter('own_thumb') }}"
                          alt="No se ha podido cargar la imagen">
                 </a>
             {% elseif wond_art.publicado %}
-                <a href="{{ asset('uploads/wondarts/' ~ wond_art.media)  | imagine_filter('my_thumb') }}" data-lightbox="roadtrip" data-title="{{ wond_art.titulo }}">
+                <a href="{{ asset('uploads/wondarts/' ~ wond_art.media)  | imagine_filter('showed_mark') }}" data-lightbox="roadtrip" data-title="{{ wond_art.titulo }}">
                     <img class="img-fluid" src="{{ asset('uploads/wondarts/' ~ wond_art.media) | imagine_filter('my_thumb') }}"
                          alt="No se ha podido cargar la imagen">
                 </a>
@@ -42,6 +42,10 @@
                 <p class="historia">{{ wond_art.historia }}</p>
             {% endif %}
             <h2 class="autor">{{ wond_art.marcaAutor.nombre }}</h2>
+
+            {% if is_granted('ROLE_AGENT') %}
+                <a role="button" class="btn" href="{{ path('marca_autor_show', { id: marcaId}) }}">Contactar</a>
+            {% endif %}
         </div>
 
     </div>

@@ -8,7 +8,10 @@
         {{ form_row(form.email) }}
         {{ form_row(form.telefono) }}
 
-        <button class="btn">{{ button_label|default('Crear Nueva') }}</button>
+        <div class="acciones">
+            <button class="btn">{{ button_label|default('Crear Nueva') }}</button>
+        </div>
+
     {{ form_end(form) }}
 
 

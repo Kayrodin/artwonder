@@ -26,3 +26,19 @@ liip_imagine:
           size: [1200, 800]
           mode: inset
           allow_upscale: true
+          allow_downscale: true
+
+    own_thumb:
+      filters:
+        thumbnail:
+          size: [1000, 800]
+          mode: inset
+          allow_upscale: true
+          allow_downscale: true
+
+    showed_mark:
+      filters:
+        watermark_image:
+          image: public/uploads/logo/logoopaco.png
+          size: 0.5
+          position: bottomright
