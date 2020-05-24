@@ -33,6 +33,7 @@ security:
          - { path: ^/home, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/marca, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/usuario, roles: IS_AUTHENTICATED_FULLY }
 
     encoders:
         App\Entity\Usuario: bcrypt

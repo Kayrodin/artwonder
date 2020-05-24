@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('marca_autor_delete', {'id': marca_autor.id}) }}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar la marca?');">
+<form method="post" action="{{ path('marca_autor_delete', {'id': marca_autor.id}) }}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar la marca? Los wondarts de esta marca también serán eliminados');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ marca_autor.id) }}">
     <button class="btn">Borrar</button>

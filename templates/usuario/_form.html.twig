@@ -1,4 +1,24 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    {{ form_row(form.nombre) }}
+    {{ form_row(form.email) }}
+
+    {% if is_granted('ROLE_AGENT') %}
+        {{ form_row(form.telefono) }}
+        {{ form_row(form.cif) }}
+        {{ form_row(form.dni) }}
+    {% endif %}
+
+    <div class="password">
+        <a class="btn" role="button" href="{{ path('usuario_edit_password') }}">Cambiar Constraseña</a>
+    </div>
+
+    <div class="acciones">
+        <button class="btn">{{ button_label|default('Actualizar') }}</button>
+        {{ include('usuario/_delete_form.html.twig') }}
+    </div>
+
+{{ form_end(form, {'render_rest': false}) }}

@@ -68,6 +68,7 @@ class WondArtType extends AbstractType
             ])
             ->add('historia', TextareaType::class, [
                 'required'=>false,
+                'attr' => ['rows' => '5', 'wrap' => 'hard', 'autocomplete' => 'on'],
             ])
 
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event){

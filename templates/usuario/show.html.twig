@@ -2,49 +2,56 @@
 
 {% block title %}Usuario{% endblock %}
 
-{% block body %}
-    <h1>Usuario</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ usuario.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ usuario.nombre }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ usuario.email }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ usuario.password }}</td>
-            </tr>
-            <tr>
-                <th>Telefono</th>
-                <td>{{ usuario.telefono }}</td>
-            </tr>
-            <tr>
-                <th>Cif</th>
-                <td>{{ usuario.cif }}</td>
-            </tr>
-            <tr>
-                <th>Dni</th>
-                <td>{{ usuario.dni }}</td>
-            </tr>
-            <tr>
-                <th>Tipo</th>
-                <td>{{ usuario.tipo }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('usuario_index') }}">back to list</a>
-
-    <a href="{{ path('usuario_edit', {'id': usuario.id}) }}">edit</a>
-
-    {{ include('usuario/_delete_form.html.twig') }}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/navLetter.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/showUser.css') }}">
 {% endblock %}
+
+{% block body %}
+    <div id="menu-perfil">
+        {% include 'navbar.html.twig' %}
+    </div>
+
+    <div class="contenedor">
+        <h1>Bienvenido {{ usuario.nombre }}</h1>
+
+        <div class="infomacion">
+            <div class="row col-3">
+                <label for="email">Correo:</label>
+                <p id="email">{{ usuario.email }}</p>
+            </div>
+{#            <div class="row">#}
+{#                <div class="col-3">#}
+{#                    <label for="txtPassword"></label>#}
+{#                    <div class="input-group">#}
+{#                        <input id="txtPassword" type="Password" class="form-control" value="{{ usuario.password }}" readonly>#}
+{#                        <div class="input-group-append">#}
+{#                            <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+            {% if usuario.telefono %}
+            <div class="row col-3">
+                <label for="telefono">Telefono: </label>
+                <p id="telefono">{{ usuario.telefono }}</p>
+            </div>
+            {% endif %}
+            {% if usuario.dni %}
+                <div class="row col-3">
+                    <label for="dni">DNI: </label>
+                    <p id="dni">{{ usuario.dni }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="acciones">
+        <a role="button" class="btn" href="{{ path('usuario_edit', {'id': usuario.id}) }}">edit</a>
+        {{ include('usuario/_delete_form.html.twig') }}
+    </div>
+
+{% endblock %}
+        {% block javascripts %}
+            <script type="text/javascript" src="https://kit.fontawesome.com/a076d05399.js"></script>
+        {% endblock %}

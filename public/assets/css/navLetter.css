@@ -32,6 +32,14 @@
     font-weight: bold;
 }
 
+#menu-perfil #navbarDropdown{
+    font-weight: bold;
+}
+
+#menu-perfil #Perfil{
+    font-weight: bold;
+}
+
 .dropdown-menu{
     left: -60%;
 }
