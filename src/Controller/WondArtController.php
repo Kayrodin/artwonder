@@ -88,7 +88,7 @@ class WondArtController extends AbstractController
         $isOwner = false;
         if ($this->getUser()){
             $user = $this->getUser();
-            $marcaOwner = $wondArt->getMarcaAutor()->getPropietario()->getId();
+            $marcaOwner = $wondArt->getMarcaAutor()->getId();
             $isOwner = ($user->getId() == $marcaOwner);
         }
 
