@@ -1,9 +1,10 @@
 var tipo = $('#registration_form_rol');
 var token = $('#registration_form__token');
 var agent = $('.agentForm');
+var $form = $('#registration_form');
 
 tipo.change(function () {
-    var $form = $(this).closest('form');
+    // var $form = $(this).closest('form');
     var data = {};
 
     data[token.attr('name')] = token.val();

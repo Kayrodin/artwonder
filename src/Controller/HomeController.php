@@ -40,10 +40,6 @@ class HomeController extends AbstractController
 
         $islastpage = (count($wondarts)==0);
 
-        $response = $this->render('home/wondart_structure.html.twig', [
-            'wondarts' => $wondarts,
-        ]);
-
         $response = array(
             "code" => 200,
             "lastpage" => $islastpage,

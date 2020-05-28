@@ -7,30 +7,21 @@
     top: 25%;
     transform: translateX(-50%);
     padding: 2%;
+    min-width: 350px;
 }
 
 .container h1, label{
     font-family: McLetter;
     font-size: 20px;
+    text-align: center;
 }
 
-#registration_form>div{
+form>div, #registration_form_password>div, .agentForm>div{
     display: flex;
+    width: 100%;
     flex-flow: row wrap;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-}
-
-#registration_form>div label{
-    align-self: end;
-}
-
-#registration_form div:first-child{
-    justify-content: center;
-}
-
-#registration_form div:nth-child(9){
-    justify-content: center;
 }
 
 .container .btn{
@@ -41,4 +32,10 @@
 .botones{
     display: flex;
     justify-content: center;
+}
+
+form, #registration_form_password, .agentForm{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }

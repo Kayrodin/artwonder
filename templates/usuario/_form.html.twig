@@ -1,8 +1,4 @@
 {{ form_start(form) }}
-    <div class="my-custom-class-for-errors">
-        {{ form_errors(form) }}
-    </div>
-
     {{ form_row(form.nombre) }}
     {{ form_row(form.email) }}
 
@@ -12,13 +8,10 @@
         {{ form_row(form.dni) }}
     {% endif %}
 
-    <div class="password">
-        <a class="btn" role="button" href="{{ path('usuario_edit_password') }}">Cambiar Constraseña</a>
-    </div>
-
+    {{ form_widget(form._token) }}
     <div class="acciones">
-        <button class="btn">{{ button_label|default('Actualizar') }}</button>
-        {{ include('usuario/_delete_form.html.twig') }}
+        <a class="btn ml-0" role="button" href="{{ path('usuario_edit_password') }}">Cambiar Constraseña</a>
+        <button class="btn mr-0">{{ button_label|default('Actualizar') }}</button>
     </div>
 
 {{ form_end(form, {'render_rest': false}) }}

@@ -7,14 +7,35 @@
 {% block title %}Ajustes{% endblock %}
 
 {% block body %}
+
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-success flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <div id="menu-perfil">
         {% include 'navbar.html.twig' %}
     </div>
 
-    <div class="container">
+    <div class="ajustesContenedor">
         <h1>Ajustes</h1>
 
         {{ include('usuario/_form.html.twig') }}
+
+        <div class="borrar">
+            {{ include('usuario/_delete_form.html.twig') }}
+        </div>
+
     </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $( document ).ready(function() {
+            $('.flash-notice').delay(3000).fadeOut();
+        });
+    </script>
 
 {% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/chooseRol.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/navLetter.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div id="menu-register">
+            {% include 'navbar.html.twig' %}
+        </div>
+    {% else %}
+        <div id="menu-register">
+            {% include 'navbar_anon.html.twig' %}
+        </div>
+    {% endif %}
+
+    <div id="particles-js"></div>
+    <div class="container">
+        <h1 class="my-3">Elige tu rol</h1>
+        <div class="eleccion">
+            <a class="btn" role="button" href="{{ path('app_register', {'rol':'1'}) }}">
+                <div class="usuario card">
+                    <h2 class="card-title titulo">Usuario</h2>
+                    <img class="img-fluid card-img-top" src="{{ asset('uploads/roles/artista.jpg') }}" alt="No se ha podido cargar">
+                    <div class="card-body">
+                        <p class="descripcion card-text">Elige este rol si eres un artista que busca publicar sus obras en nuestra plataforma</p>
+                    </div>
+                </div>
+            </a>
+            <a class="btn" role="button" href="{{ path('app_register', {'rol':'0'}) }}">
+                <div class="agente card">
+                    <h2 class="card-title titulo">Agente</h2>
+                    <img class="img-fluid card-img-top" src="{{ asset('uploads/roles/empresario.jpg') }}" alt="No se ha podido cargar">
+                    <div class="card-body">
+                        <p class="descripcion card-text">Elige este rol si eres agente de una entidad y estás buscando contactar
+                            con nuevos artistas en nuestra plataforma</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/particles.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+{% endblock %}

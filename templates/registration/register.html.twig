@@ -21,8 +21,23 @@
 
     <div id="particles-js"></div>
     <div class="container">
+        <h1>Rellena con tus datos</h1>
         {{ form_start(registrationForm) }}
-        {{ form_widget(registrationForm) }}
+        <div class="my-custom-class-for-errors">
+            {{ form_errors(registrationForm) }}
+        </div>
+        {{ form_row(registrationForm.rol) }}
+        {{ form_row(registrationForm.nombre) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_widget(registrationForm.password) }}
+
+        <div class="agentForm">
+            {{ form_row(registrationForm.dni) }}
+            {{ form_row(registrationForm.telefono) }}
+            {{ form_row(registrationForm.cif) }}
+        </div>
+
+        {{ form_rest(registrationForm) }}
         <div class="botones">
             <button class="btn">Aceptar</button>
             <button class="btn" type="reset">Resetear</button>

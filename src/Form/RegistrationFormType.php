@@ -32,6 +32,7 @@ class RegistrationFormType extends AbstractType
                     'Usuario' => true,
                     'Agente' => false,
                 ],
+                'data' => $options['rol'],
             ])
             ->add('nombre', TextType::class,[
                 'label' => 'Nombre',
@@ -88,11 +89,10 @@ class RegistrationFormType extends AbstractType
                         ])
                     ]
                 ])
-            ->add('telefono', TelType::class,
-                [
-                    'attr' => ['class' => 'agentForm'],
-                    'label_attr'=> ['class'=> 'agentForm'],
-                ])
+            ->add('telefono', TelType::class,[
+                'attr' => ['class' => 'agentForm'],
+                'label_attr'=> ['class'=> 'agentForm'],
+            ])
             ->add('cif', TextType::class,
                 [
                     'attr' => ['class' => 'agentForm'],
@@ -119,6 +119,9 @@ class RegistrationFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setRequired([
+           'rol',
+        ]);
         $resolver->setDefaults([
             'data_class' => Usuario::class,
         ]);

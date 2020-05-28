@@ -57,7 +57,7 @@ class Usuario implements UserInterface
     private $tipo;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MarcaAutor", mappedBy="propietario", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\MarcaAutor", mappedBy="propietario", orphanRemoval=true, cascade={"persist"})
      */
     private $marcas;
 

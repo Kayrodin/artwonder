@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\MarcaAutor;
 use App\Entity\Usuario;
+use App\Form\ChooseRoleType;
 use App\Form\RegistrationFormType;
 use App\Security\LoginAuthenticator;
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,16 +17,28 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class RegistrationController extends AbstractController
 {
+
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/choose", name="app_choose")
+     */
+    public function chooseRole(Request $request): Response
+    {
+        return $this->render('registration/chooserol.html.twig');
+    }
+
+    /**
+     * @Route("/register/{rol}", name="app_register")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginAuthenticator $authenticator): Response
     {
+        $rol = $request->get('rol');
         if(!is_null($this->getUser())){
             return $this->redirect($this->generateUrl('home'));
         }
         $user = new Usuario();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(RegistrationFormType::class, $user, [
+            'rol' => $rol,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -37,11 +52,13 @@ class RegistrationController extends AbstractController
             $rol = $form->get('rol')->getViewData();
             if($rol == 1){
                 $user->setTipo('ROLE_USER');
+                $marcaAnonima = new MarcaAutor();
+                $marcaAnonima->setNombre('ANONIMO');
+                $user->addMarca($marcaAnonima);
             }
             if($rol == 0){
                 $user->setTipo('ROLE_AGENT');
             }
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -60,4 +77,5 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+
 }
