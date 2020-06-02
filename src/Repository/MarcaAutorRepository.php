@@ -22,7 +22,9 @@ class MarcaAutorRepository extends ServiceEntityRepository
     public function findAllByMy($userId){
     return $this->createQueryBuilder('m')
         ->andWhere('m.propietario = :user')
+        ->andWhere('m.nombre != :anon')
         ->setParameter('user', $userId)
+        ->setParameter('anon', 'ANONIMO')
         ->getQuery()
         ->getResult()
         ;

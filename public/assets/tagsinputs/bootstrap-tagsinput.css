@@ -42,7 +42,7 @@
   color: #0d0b0b;
   border-radius: 6px;
   text-align: center;
-  padding: 1px;
+  padding: 3px;
   box-shadow: 0 0 3px 1px black;
 }
 .bootstrap-tagsinput .tag [data-role="remove"] {

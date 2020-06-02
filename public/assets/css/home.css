@@ -15,11 +15,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 100%;
 }
 
 .wondarts{
     position: relative;
-    max-width: 400px;
+    max-width: 250px;
     margin: 5px;
 }
 
@@ -51,7 +52,7 @@
 
 .wondarts-body h1{
     font-family: McLetter;
-    font-size: 2em;
+    font-size: 140%;
     font-weight: bold;
     text-shadow: 0 0 3px black;
     text-align: center;
@@ -59,7 +60,7 @@
 
 .wondarts-body h2{
     font-family: McLetter;
-    font-size: 1em;
+    font-size: 100%;
     font-weight: bold;
     text-shadow: 0 0 3px black;
 }
