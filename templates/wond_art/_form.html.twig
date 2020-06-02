@@ -1,16 +1,33 @@
 {{ form_start(form) }}
 
-    <div class="my-custom-class-for-errors">
-        {{ form_errors(form) }}
+    {{ form_row(form.etiquetas) }}
+
+    <div class="main-content">
+        <div class="lat mr-lg-5">
+            {{ form_row(form.titulo) }}
+            {{ form_row(form.historia, {'attr' : {'rows' : '5', 'cols' : '30'}}) }}
+        </div>
+
+        <div class="lat">
+            <div class="imag">
+                <img src="{{ asset('uploads/no-image/no-image.jpg') }}" id="preview" alt="">
+            </div>
+            {{ form_row(form.media, {'label':'Insertar','attr': {'accept':'image/*'}}) }}
+            {{ form_row(form.marcaAutor) }}
+        </div>
     </div>
 
-    {{ form_row(form.titulo) }}
-    {{ form_row(form.media)}}
-    {{ form_row(form.historia) }}
-    {{ form_row(form.marcaAutor) }}
 
-    <div class="acciones">
+    <div id="etiquetas">
+        <input id="tags-id" type="text" value="" data-role="tagsinput" placeholder="Agrega etiquetas..." />
+    </div>
+    <div class="acciones mt-2">
         <button class="btn">{{ button_label|default('Crear') }}</button>
+        <input type="reset" class="btn">
+        <input type="button" class="btn" value="Cerrar" id="cerrar">
     </div>
+
 
 {{ form_end(form) }}
+
+<script src="{{ asset('assets/tagsinputs/bootstrap-tagsinput.js') }}"></script>

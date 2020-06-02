@@ -8,3 +8,22 @@
     background-repeat: no-repeat;
     z-index: -1000;
 }
+
+body{
+    padding: 0!important;
+}
+
+#cortina{
+    position: fixed;
+    display: none;
+    z-index: 999;
+    height: 100vh;
+    width: 100vw;
+    background-color: #0000003b;
+}
+
+.flash-notice{
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+}

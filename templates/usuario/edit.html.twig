@@ -18,6 +18,7 @@
         {% include 'navbar.html.twig' %}
     </div>
 
+
     <div class="ajustesContenedor">
         <h1>Ajustes</h1>
 
@@ -28,14 +29,14 @@
         </div>
 
     </div>
+    <div id="particles-js"></div>
 
 {% endblock %}
 
 {% block javascripts %}
-    <script>
-        $( document ).ready(function() {
-            $('.flash-notice').delay(3000).fadeOut();
-        });
-    </script>
+
+    <script src="{{ asset('assets/js/flashMessages.js') }}"></script>
+    <script src="{{ asset('assets/js/particles.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
 
 {% endblock %}

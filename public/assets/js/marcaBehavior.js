@@ -6,8 +6,9 @@ $('#new').click(function () {
         success: function(response) {
             $('#form-new').html(response.html);
             $('#form-new').show().animate({
-                right:'0',
+                right:'50%',
             }, 500);
+            $('#cortina').show();
         },
         error: function(data) {
             console.log("Error in async callback");
@@ -24,8 +25,9 @@ $('.edit').on('click', function (e) {
         success: function(response) {
             $('#form-edit').html(response.html);
             $('#form-edit').show().animate({
-                right:'0',
+                right:'50%',
             }, 500);
+            $('#cortina').show();
         },
         error: function(data) {
             console.log("Error in async callback");
@@ -38,14 +40,16 @@ $(document).on('click', function (event) {
     content1 = $('#form-new');
     content2 = $('#form-edit');
 
-    if(!content1.is(event.target) && !$.contains(content1[0],event.target) && event.target.id != 'new'){
+    if( event.target.id == 'cerrar'){
         content1.animate({
             right:'-300px',
         }, 500).hide(500);
+        $('#cortina').hide();
     }
-    if(!content2.is(event.target) && !$.contains(content2[0],event.target) && event.target.classList[0] != 'edit'){
+    if( event.target.id == 'cerrar'){
         content2.animate({
             right:'-300px',
         }, 500).hide(500);
+        $('#cortina').hide();
     }
 })

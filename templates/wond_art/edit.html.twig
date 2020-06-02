@@ -1,6 +1,35 @@
 <div class="form-group">
-    <h1>Edit WondArt</h1>
+    <h1>Edita tu Wondart</h1>
+        {{ form_start(form) }}
 
-    {{ include('wond_art/_form.html.twig', {'button_label': 'Actualizar'}) }}
+            {{ form_row(form.etiquetas) }}
 
+        <div class="main-content">
+            <div class="lat mr-lg-5">
+                {{ form_row(form.titulo) }}
+                {{ form_row(form.historia, {'attr' : {'rows' : '5', 'cols' : '30'}}) }}
+            </div>
+
+            <div class="lat">
+                <div class="imag">
+                    <img src="{{ asset('uploads/wondarts/' ~ wond_art.media) }}" id="preview" alt="">
+                </div>
+                {{ form_row(form.media, {'label':'Cambiar','attr': {'accept':'image/*'}}) }}
+                {{ form_row(form.marcaAutor) }}
+            </div>
+        </div>
+
+
+        <div id="etiquetas">
+            <input id="tags-id" type="text" value="" data-role="tagsinput" placeholder="Agrega etiquetas..." />
+        </div>
+        <div class="acciones mt-2">
+            <button class="btn" onclick="submit()">{{ button_label|default('Actualizar') }}</button>
+            <input type="button" class="btn" value="Cerrar" id="cerrar">
+        </div>
+
+
+        {{ form_end(form) }}
 </div>
+
+<script src="{{ asset('assets/tagsinputs/bootstrap-tagsinput.js') }}"></script>

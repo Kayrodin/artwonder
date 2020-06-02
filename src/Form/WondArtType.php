@@ -8,6 +8,7 @@ use App\Repository\MarcaAutorRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,12 +45,14 @@ class WondArtType extends AbstractType
     {
 
         $builder
+            ->add('etiquetas', HiddenType::class)
             ->add('titulo', TextType::class, [
                 'required' => true,
             ])
 
             ->add('media', FileType::class, [
-                'required' => true,
+                'required' => $options['edited'],
+                'mapped' => $options['edited'],
                 'data_class' => null,   //no restringe el tipo de dato que le llega en el ajax
                 'constraints' => [
                     new File([
@@ -68,7 +71,7 @@ class WondArtType extends AbstractType
             ])
             ->add('historia', TextareaType::class, [
                 'required'=>false,
-                'attr' => ['rows' => '5', 'wrap' => 'hard', 'autocomplete' => 'on'],
+                'attr' => ['wrap' => 'hard', 'autocomplete' => 'on'],
             ])
 
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event){
@@ -92,9 +95,11 @@ class WondArtType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setRequired([
+            'edited',
+        ]);
         $resolver->setDefaults([
             'data_class' => WondArt::class,
-            'media' => null,
         ]);
     }
 }

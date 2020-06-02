@@ -24,6 +24,11 @@ form>div, #registration_form_password>div, .agentForm>div{
     align-items: center;
 }
 
+.container input{
+    border: 0;
+    border-bottom: 1px solid grey;
+}
+
 .container .btn{
     box-shadow: 1px 1px 5px black;
     margin: 10px;

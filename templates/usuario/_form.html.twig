@@ -1,10 +1,14 @@
 {{ form_start(form) }}
+    <div class="form-error">
+        {{ form_errors(form.dni) }}
+        {{ form_errors(form) }}
+    </div>
+
     {{ form_row(form.nombre) }}
     {{ form_row(form.email) }}
 
     {% if is_granted('ROLE_AGENT') %}
         {{ form_row(form.telefono) }}
-        {{ form_row(form.cif) }}
         {{ form_row(form.dni) }}
     {% endif %}
 

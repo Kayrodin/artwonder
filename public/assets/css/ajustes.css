@@ -31,6 +31,8 @@ form>div{
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
+    margin-top: 1%;
+    padding: 1%;
 }
 
 form{
@@ -41,7 +43,12 @@ form{
 
 .acciones{
     display: flex;
+    flex-flow: row nowrap;
     justify-content: center;
+}
+
+.acciones *{
+    min-width: 30%;
 }
 
 .borrar *{
@@ -73,8 +80,16 @@ form{
     justify-content: center;
 }
 
-.flash-notice{
-    position: absolute;
-    left:50%;
-    transform: translateX(-50%);
+.ajustesContenedor input {
+     width: 60%;
+     border: 0;
+     border-bottom: 1px solid grey;
+ }
+
+.ajustesContenedor div>ul {
+    display: none;
+}
+
+.form-error ul{
+    display: block!important;
 }

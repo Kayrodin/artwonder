@@ -49,7 +49,9 @@ class WondArtController extends AbstractController
         }
 
         $form = $this->createForm(WondArtType::class, $wondArt, array(
-            'action' => $this->generateUrl('wond_art_new')));
+            'action' => $this->generateUrl('wond_art_new'),
+            'edited' => true,
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,9 +65,17 @@ class WondArtController extends AbstractController
             $wondArt->setPublicado(false);
             $wondArt->setMedia($fileUploader->upload($form['media']->getData()));//sube la imagen
 
+            $etiquetas = $form['etiquetas']->getData();
+            $wondArt->setEtiquetas($etiquetas);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($wondArt);
             $entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'Se ha creado un nuevo wondart'
+            );
+
             return $this->redirectToRoute('wond_art_index');
         }
 
@@ -78,6 +88,8 @@ class WondArtController extends AbstractController
 
         return new JsonResponse($response);
     }
+
+
 
     /**
      * @Route("/{id}", name="wond_art_show", methods={"GET"})
@@ -107,12 +119,21 @@ class WondArtController extends AbstractController
         $id = $request->get('id');
         $form = $this->createForm(WondArtType::class, $wondArt,  array(
             'action' => $this->generateUrl('wond_art_edit',  array('id' => $id)),
+            'edited' => false,
         ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $wondArt->setMedia($fileUploader->upload($form['media']->getData()));
+            if($newImg = $form['media']->getData()){
+                $wondArt->setMedia($fileUploader->upload($newImg));
+            }
+
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash(
+                'notice',
+                'Su wondart ha sido actualizado'
+            );
 
             return $this->redirectToRoute('wond_art_index');
         }
@@ -169,6 +190,11 @@ class WondArtController extends AbstractController
             $entityManager->remove($wondArt);
             $entityManager->flush();
         }
+
+        $this->addFlash(
+            'notice',
+            'Su wondart ha sido eliminado'
+        );
 
         return $this->redirectToRoute('wond_art_index');
     }

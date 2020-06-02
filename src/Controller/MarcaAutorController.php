@@ -54,6 +54,10 @@ class MarcaAutorController extends AbstractController
             $entityManager->persist($marcaAutor);
             $entityManager->flush();
 
+            $this->addFlash(
+                'notice',
+                'Se ha creado una nueva marca de autor'
+            );
             return $this->redirectToRoute('marca_autor_index');
         }
 
@@ -101,6 +105,11 @@ class MarcaAutorController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash(
+                'notice',
+                'Su marca de autor ha sido actualizada'
+            );
+
             return $this->redirectToRoute('marca_autor_index');
         }
 
@@ -126,6 +135,10 @@ class MarcaAutorController extends AbstractController
             $entityManager->flush();
         }
 
+        $this->addFlash(
+            'notice',
+            'Su marca de autor ha sido eliminada'
+        );
         return $this->redirectToRoute('marca_autor_index');
     }
 }

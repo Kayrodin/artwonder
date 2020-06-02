@@ -5,9 +5,18 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/css/wondart.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/navLetter.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/tagsinputs/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/docs.css">
+    <link rel="stylesheet" href="{{ asset('assets/tagsinputs/app.css') }}">
 {% endblock %}
 
 {% block body %}
+
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-success flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
 
     <div>
         {% include 'navbar.html.twig' %}
@@ -47,11 +56,17 @@
         </div>
         <div class="form-block" id="form-new"></div>
         <div class="form-block" id="form-edit"></div>
+
     </div>
 {% endblock %}
 
 {% block javascripts %}
+    <script>
+        var newform = true;
+    </script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script src="{{ asset('assets/js/wondartBehavior.js') }}"></script>
+    <script src="{{ asset('assets/js/flashMessages.js') }}"></script>
+
 {% endblock %}

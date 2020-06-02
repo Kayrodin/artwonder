@@ -31,9 +31,6 @@
                     <img class="img-fluid" src="{{ asset('uploads/wondarts/' ~ wond_art.media) | imagine_filter('my_thumb') }}"
                          alt="No se ha podido cargar la imagen">
                 </a>
-            {% else %}
-               //redirect to another twig
-                {{ include('error404.html.twig') }}
             {% endif %}
         </div>
         <div class="infomacion">
@@ -41,7 +38,14 @@
             {% if wond_art.historia %}
                 <p class="historia">{{ wond_art.historia }}</p>
             {% endif %}
-            <h2 class="autor">{{ wond_art.marcaAutor.nombre }}</h2>
+            <div class="autor">
+                <label for="autor">Creado por:</label>
+                <h2 id="autor" class="ml-4"> {{ wond_art.marcaAutor.nombre }}</h2>
+            </div>
+
+            <div class="etiquetas mt-2">
+                <p>{{ wond_art.etiquetas }}</p>
+            </div>
 
             {% if is_granted('ROLE_AGENT') %}
                 <a role="button" class="btn" href="{{ path('marca_autor_show', { id: marcaId}) }}">Contactar</a>

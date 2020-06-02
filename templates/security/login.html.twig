@@ -31,11 +31,11 @@
                 </div>
             {% endif %}
 
-            <h1 class="h3 mb-3 font-weight-normal">Bienvenido a Artwonder</h1>
+            <h1 class="h3 font-weight-normal">Bienvenido a Artwonder</h1>
             <label for="inputEmail">Correo</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" required autofocus>
             <label for="inputPassword">Contraseña</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" required>
+            <input type="password" name="password" id="inputPassword" required>
 
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}"
@@ -55,7 +55,6 @@
             <button class="btn btn-lg" type="submit">
                 Entrar
             </button>
-            <br>
         </form>
     </div>
 

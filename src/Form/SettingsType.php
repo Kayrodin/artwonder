@@ -42,18 +42,6 @@ class SettingsType extends AbstractType
                 'attr' => ['class' => 'agentForm'],
                 'label_attr'=> ['class'=> 'agentForm'],
             ])
-            ->add('cif', TextType::class,
-                [
-                    'attr' => ['class' => 'agentForm'],
-                    'label_attr'=> ['class'=> 'agentForm'],
-                    'constraints' => [
-                        new Regex([
-                            'match' => 'false',
-                            'pattern' => '/^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])$/',
-                            'message' => 'Inserte un CIF válido',
-                        ])
-                    ]
-                ])
             ;
         }
     }

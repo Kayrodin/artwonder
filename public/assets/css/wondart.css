@@ -1,15 +1,16 @@
 .form-block{
     display: none;
+    overflow: auto;
     position: fixed;
     right: -300px;
-    z-index: 2;
+    z-index: 1000;
     background-color: #FFFFFF;
     border-radius: 3px;
     top: 50%;
-    transform: translateY(-50%);
-    height: auto;
-    box-shadow: -3px -2px 6px 0px grey;
-    padding: 2%;
+    transform: translate(50%, -50%);
+    width: 50%;
+    box-shadow: 1px -1px 4px 3px grey;
+    padding: 1%;
 }
 
 .contenedor{
@@ -71,26 +72,49 @@ tbody{
     resize: none;
 }
 
-.form-block div{
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.form-group{
-    position: relative;
-    top: 15%;
-}
-
 .form-block button{
-    margin: auto;
-    margin-top: 5%;
+    width: 80%;
 }
 
 .form-block h1, label{
     font-family: McLetter;
     font-size: 20px;
+}
+
+form input {
+    width: 80%;
+    border: 0;
+    border-bottom: 1px solid grey;
+}
+
+label{
+    margin-bottom: 0;
+    margin-top: 5%;
+}
+
+.form-block .lat{
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.form-block div{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+}
+
+.form-block .main-content{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.form-block h1{
+    margin-bottom: 3%;
+    font-size: 25px;
 }
 
 #wond_art_media{
@@ -104,12 +128,13 @@ tbody{
 
 .acciones{
     justify-content: center!important;
+    flex-direction: row!important;
 }
 
 label[for="wond_art_media"] {
     font-size: 14px;
-    color: #fff;
-    background-color: #106BA0;
+    color: black;
+    background-color: white;
     display: inline-block;
     transition: all .5s;
     cursor: pointer;
@@ -117,5 +142,28 @@ label[for="wond_art_media"] {
     text-transform: uppercase;
     width: fit-content;
     text-align: center;
-    margin-top: 15px;
+    margin: auto;
+    box-shadow: 1px 1px 5px black;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.imag{
+    width: fit-content;
+    margin: auto;
+    margin-top: 10px;
+}
+
+#preview{
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 5px;
+}
+
+.borrar{
+    color: red;
+}
+
+.borrar:hover{
+    color: red;
 }

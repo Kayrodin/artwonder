@@ -7,10 +7,6 @@ easy_admin:
 #        - App\Entity\Category
         Usuario:
             class: App\Entity\Usuario
-
-        Marcas:
-            class: App\Entity\MarcaAutor
-
         WondArts:
             class: App\Entity\WondArt
     user:

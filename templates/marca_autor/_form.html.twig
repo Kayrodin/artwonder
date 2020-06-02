@@ -1,14 +1,15 @@
 {{ form_start(form) }}
-        <div class="my-custom-class-for-errors">
-            {{ form_errors(form) }}
+
+        <div class="content">
+            {{ form_row(form.nombre) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.telefono) }}
         </div>
 
-        {{ form_row(form.nombre) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.telefono) }}
 
-        <div class="acciones">
-            <button class="btn">{{ button_label|default('Crear Nueva') }}</button>
+        <div class="acciones mt-2">
+            <button class="btn">{{ button_label|default('Crear') }}</button>
+            <input type="button" class="btn" value="Cerrar" id="cerrar">
         </div>
 
 {{ form_end(form) }}

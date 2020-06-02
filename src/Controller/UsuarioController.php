@@ -39,7 +39,12 @@ class UsuarioController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('home');
+
+            $this->addFlash(
+                'notice',
+                'Sus cambios se han guardado'
+            );
+
         }
         return $this->render('usuario/edit.html.twig', [
             'usuario' => $usuario,
@@ -67,7 +72,7 @@ class UsuarioController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'Su contraseña ha sido cambiada!'
+                'Su contraseña ha sido cambiada'
             );
 
             return $this->redirectToRoute('usuario_edit');

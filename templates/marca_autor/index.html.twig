@@ -8,6 +8,13 @@
 {% endblock %}
 
 {% block body %}
+
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-success flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <div>
         {% include 'navbar.html.twig' %}
     </div>
@@ -49,4 +56,5 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script src="{{ asset('assets/js/marcaBehavior.js') }}"></script>
+    <script src="{{ asset('assets/js/flashMessages.js') }}"></script>
 {% endblock %}
