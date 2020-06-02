@@ -99,14 +99,17 @@ class WondArtController extends AbstractController
         $marcaOwner = null;
         $isOwner = false;
         if ($user = $this->getUser()){
-            $marcaOwner = $wondArt->getMarcaAutor()->getPropietario()->getId();
+            $marcaAutor = $wondArt->getMarcaAutor();
+            $propietario = $marcaAutor->getPropietario();
+            $marcaOwner = $propietario->getId();
+
             $isOwner = ($user->getId() == $marcaOwner);
         }
 
         return $this->render('wond_art/show.html.twig', [
             'wond_art' => $wondArt,
             'isOwner' => $isOwner,
-            'marcaId' => $marcaOwner,
+            'marcaId' => $marcaAutor->getId(),
         ]);
     }
 

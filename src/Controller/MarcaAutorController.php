@@ -72,7 +72,7 @@ class MarcaAutorController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="marca_autor_show", methods={"GET"})
+     * @Route("/show/{id}", name="marca_autor_show", methods={"GET"})
      */
     public function show(MarcaAutor $marcaAutor): Response
     {
