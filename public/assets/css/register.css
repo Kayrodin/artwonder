@@ -16,6 +16,10 @@
     text-align: center;
 }
 
+.container h1{
+    font-size: 25px;
+}
+
 form>div, #registration_form_password>div, .agentForm>div{
     display: flex;
     width: 100%;

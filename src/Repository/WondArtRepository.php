@@ -34,7 +34,7 @@ class WondArtRepository extends ServiceEntityRepository
             ->andWhere('w.titulo like :search or w.etiquetas like :search')
             ->andWhere('w.publicado = 1')
             ->setParameter('search', '%'.$search.'%')
-            ->orderBy('w.id', 'ASC')
+            ->orderBy('w.fecha', 'DESC')
             ->setFirstResult($from)
             ->setMaxResults($limit)
             ;
@@ -46,7 +46,7 @@ class WondArtRepository extends ServiceEntityRepository
     public function findPageRange($from, $limit){
         return $this->createQueryBuilder('w')
             ->andWhere('w.publicado = 1')
-            ->orderBy('w.id', 'ASC')
+            ->orderBy('w.fecha', 'DESC')
             ->setFirstResult($from)
             ->setMaxResults($limit)
             ->getQuery()

@@ -8,13 +8,14 @@
             </div>
             <button type="submit" class="form-control border-0"><span class="fa fa-search"></span></button>
         </form>
-        <ul class="navbar-nav" id="home">
+{#        <ul class="navbar-nav" id="home">#}
+
+{#        </ul>#}
+
+        <ul class="navbar-nav ml-auto" id="menu">
             <li class="nav-item">
                 <a class="nav-link" id="inicio" href="{{ path('home') }} ">Inicio</a>
             </li>
-        </ul>
-
-        <ul class="navbar-nav ml-auto" id="menu">
             {% if is_granted('ROLE_USER') %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

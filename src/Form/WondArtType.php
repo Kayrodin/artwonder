@@ -7,6 +7,7 @@ use App\Entity\WondArt;
 use App\Repository\MarcaAutorRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -17,6 +18,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraints\File;
+use function Sodium\add;
 
 class WondArtType extends AbstractType
 {
@@ -56,7 +58,7 @@ class WondArtType extends AbstractType
                 'data_class' => null,   //no restringe el tipo de dato que le llega en el ajax
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '8m',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/jpg',

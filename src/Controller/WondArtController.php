@@ -2,15 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Comentario;
 use App\Entity\MarcaAutor;
 use App\Entity\Usuario;
 use App\Entity\WondArt;
 use App\Form\WondArtType;
 use App\Repository\WondArtRepository;
 use App\Service\FileUploader;
-use App\Service\Publicator;
-use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -54,29 +51,35 @@ class WondArtController extends AbstractController
         ));
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            //Securiza la creación de wondarts
-            $marcaAutorId = $wondArt->getMarcaAutor()->getId();
-            $brandOwnerId = $this->getDoctrine()->getRepository(MarcaAutor::class)->find($marcaAutorId)->getPropietario()->getId();
-            if($brandOwnerId != $user->getId()){
-                throw new AccessDeniedException("Usuario, no autorizado");
+        $error = $form->getErrors();
+
+        if ($form->isSubmitted()){
+            if ($form->isValid()) {
+                //Securiza la creación de wondarts
+                $marcaAutorId = $wondArt->getMarcaAutor()->getId();
+                $brandOwnerId = $this->getDoctrine()->getRepository(MarcaAutor::class)->find($marcaAutorId)->getPropietario()->getId();
+                if ($brandOwnerId != $user->getId()) {
+                    throw new AccessDeniedException("Usuario, no autorizado");
+                }
+
+                $wondArt->setPublicado(false);
+                $media = $form['media']->getData();
+                $wondArt->setMedia($fileUploader->upload($media));//sube la imagen
+
+                $etiquetas = $form['etiquetas']->getData();
+                $wondArt->setEtiquetas($etiquetas);
+                $wondArt->setFecha(new \DateTime());
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($wondArt);
+                $entityManager->flush();
+
+                $this->addFlash(
+                    'notice',
+                    'Se ha creado un nuevo wondart'
+                );
+
+                return $this->redirectToRoute('wond_art_index');
             }
-
-            $wondArt->setPublicado(false);
-            $wondArt->setMedia($fileUploader->upload($form['media']->getData()));//sube la imagen
-
-            $etiquetas = $form['etiquetas']->getData();
-            $wondArt->setEtiquetas($etiquetas);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($wondArt);
-            $entityManager->flush();
-
-            $this->addFlash(
-                'notice',
-                'Se ha creado un nuevo wondart'
-            );
-
-            return $this->redirectToRoute('wond_art_index');
         }
 
         $response = array(
@@ -89,8 +92,6 @@ class WondArtController extends AbstractController
         return new JsonResponse($response);
     }
 
-
-
     /**
      * @Route("/{id}", name="wond_art_show", methods={"GET"})
      */
@@ -98,8 +99,8 @@ class WondArtController extends AbstractController
     {
         $marcaOwner = null;
         $isOwner = false;
+        $marcaAutor = $wondArt->getMarcaAutor();
         if ($user = $this->getUser()){
-            $marcaAutor = $wondArt->getMarcaAutor();
             $propietario = $marcaAutor->getPropietario();
             $marcaOwner = $propietario->getId();
 

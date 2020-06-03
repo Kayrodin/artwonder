@@ -1,6 +1,7 @@
 .media img{
-    width: fit-content;
+    /*width: fit-content;*/
     box-shadow: 3px 2px 5px 2px black;
+    width: 100%;
 }
 
 #disqus_thread{
