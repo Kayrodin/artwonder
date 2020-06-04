@@ -27,9 +27,10 @@ class WondArtController extends AbstractController
      */
     public function index(WondArtRepository $wondArtRepository): Response
     {
-        $userId = $this->getUser()->getId();
+        $user = $this->getUser();
         return $this->render('wond_art/index.html.twig', [
-            'wond_arts' => $wondArtRepository->findAllByMy($userId),
+            'wond_arts' => $wondArtRepository->findAllByMy($user->getId()),
+            'usuario' => $user,
         ]);
     }
 
@@ -100,7 +101,9 @@ class WondArtController extends AbstractController
         $marcaOwner = null;
         $isOwner = false;
         $marcaAutor = $wondArt->getMarcaAutor();
-        if ($user = $this->getUser()){
+        $user = 'Perfil';
+        if ($this->getUser()){
+            $user = $this->getUser();
             $propietario = $marcaAutor->getPropietario();
             $marcaOwner = $propietario->getId();
 
@@ -112,6 +115,7 @@ class WondArtController extends AbstractController
             'isOwner' => $isOwner,
             'marcaId' => $marcaAutor->getId(),
             'marcaName' => $marcaAutor->getNombre(),
+            'usuario' => $user,
         ]);
     }
 

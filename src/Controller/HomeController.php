@@ -16,12 +16,17 @@ class HomeController extends AbstractController
      */
     public function index(Request $request)
     {
+        $user = 'Perfil';
         $searchQuery = $request->get('query');
+        if ($this->getUser()){
+            $user = $this->getUser();
+        }
 
         $limit = 10;
         return $this->render('home/index.html.twig', [
             'limit'=> $limit,
             'search' => $searchQuery,
+            'usuario' => $user,
         ]);
     }
 

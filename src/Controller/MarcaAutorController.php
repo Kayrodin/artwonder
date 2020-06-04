@@ -25,9 +25,10 @@ class MarcaAutorController extends AbstractController
      */
     public function index(MarcaAutorRepository $marcaAutorRepository): Response
     {
-        $userId = $this->getUser()->getId();
+        $user = $this->getUser();
         return $this->render('marca_autor/index.html.twig', [
-            'marca_autors' => $marcaAutorRepository->findAllByMy($userId),
+            'marca_autors' => $marcaAutorRepository->findAllByMy($user->getId()),
+            'usuario' => $user,
         ]);
     }
 
