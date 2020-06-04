@@ -5,6 +5,7 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/css/marca.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/navLetter.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/marcaShow.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -31,7 +32,7 @@
                     <tr>
                         <td class="name_brand">{{ marca_autor.nombre }}</td>
                         <td>
-                            <a class="btn" role="button" href="{{ path('marca_autor_show', {'id': marca_autor.id}) }}">Mostrar</a>
+                            <button class="btn" data-id="{{ marca_autor.id }}" id="showContact">Mostrar</button>
                             <button class="edit btn" data-id="{{ marca_autor.id }}">Editar</button>
                             {{ include('marca_autor/_delete_form.html.twig') }}
                         </td>
@@ -48,6 +49,7 @@
         </div>
         <div class="form-block" id="form-new"></div>
         <div class="form-block" id="form-edit"></div>
+        <div class="contact" id="contact"></div>
     </div>
 
 {% endblock %}
@@ -55,6 +57,7 @@
 {% block javascripts %}
     <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('assets/js/showContact.js') }}"></script>
     <script src="{{ asset('assets/js/marcaBehavior.js') }}"></script>
     <script src="{{ asset('assets/js/flashMessages.js') }}"></script>
 {% endblock %}

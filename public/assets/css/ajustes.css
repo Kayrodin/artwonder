@@ -21,10 +21,6 @@
     font-size: 20px;
 }
 
-.ajustesContenedor h1{
-    font-size: 28px;
-}
-
 form>div{
     display: flex;
     width: 100%;
@@ -92,4 +88,9 @@ form{
 
 .form-error ul{
     display: block!important;
+}
+
+.ajustesContenedor h1{
+    font-size: 28px;
+    margin: 0;
 }

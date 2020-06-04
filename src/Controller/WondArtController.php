@@ -111,6 +111,7 @@ class WondArtController extends AbstractController
             'wond_art' => $wondArt,
             'isOwner' => $isOwner,
             'marcaId' => $marcaAutor->getId(),
+            'marcaName' => $marcaAutor->getNombre(),
         ]);
     }
 

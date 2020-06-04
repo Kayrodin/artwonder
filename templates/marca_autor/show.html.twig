@@ -1,36 +1,20 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}MarcaAutor{% endblock %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/navLetter.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/marcaShow.css') }}">
-{% endblock %}
+    <h1>Datos de contacto</h1>
 
-{% block body %}
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <div>
-            {% include 'navbar.html.twig' %}
-        </div>
-    {% else %}
-        <div>
-            {% include 'navbar_anon.html.twig' %}
-        </div>
-    {% endif %}
+    <div class="informacion">
+        <h2>Nombre</h2>
+        <p>{{ marca_autor.nombre }}</p>
 
-    <div class="contenedor">
-        <h1>Datos de contacto</h1>
+        <h2>Correo</h2>
+        <p>{{ marca_autor.email }}</p>
 
-        <div class="informacion">
-            <h2>Nombre</h2>
-            <p>{{ marca_autor.nombre }}</p>
-
-            <h2>Correo</h2>
-            <p>{{ marca_autor.email }}</p>
-
+        {% if marca_autor.telefono %}
             <h2>Telefono</h2>
             <p>{{ marca_autor.telefono }}</p>
-        </div>
+        {% endif %}
 
+        <button class="btn" id="cerrar">Cerrar</button>
     </div>
-{% endblock %}
+
+

@@ -27,3 +27,7 @@ body{
     left:50%;
     transform: translateX(-50%);
 }
+
+h1{
+    padding:0.5em;
+}

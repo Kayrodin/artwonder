@@ -72,13 +72,17 @@ class MarcaAutorController extends AbstractController
     }
 
     /**
-     * @Route("/show/{id}", name="marca_autor_show", methods={"GET"})
+     * @Route("/api/show/{id}", name="marca_autor_show", options={"expose"=true}, methods={"GET"})
      */
-    public function show(MarcaAutor $marcaAutor): Response
+    public function show(MarcaAutor $marcaAutor): JsonResponse
     {
-        return $this->render('marca_autor/show.html.twig', [
-            'marca_autor' => $marcaAutor,
-        ]);
+        $response = array(
+            "code" => 200,
+            "html" =>  $this->render('marca_autor/show.html.twig', [
+                'marca_autor' => $marcaAutor,
+            ])->getContent());
+
+        return new JsonResponse($response);
     }
 
     /**

@@ -4,6 +4,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/css/navLetter.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/marcaShow.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/wondartShow.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/lightbox2-2.11.1/dist/css/lightbox.min.css') }}">
 {% endblock %}
@@ -47,10 +48,12 @@
                 <p>{{ wond_art.etiquetas }}</p>
             </div>
 
-            {% if is_granted('ROLE_AGENT') %}
-                <a role="button" class="btn" href="{{ path('marca_autor_show', { id: marcaId}) }}">Contactar</a>
+            {% if is_granted('ROLE_AGENT') and marcaName != 'ANONIMO' %}
+                <button class="btn" data-id="{{ marcaId }}" id="showContact">Contacto</button>
             {% endif %}
         </div>
+
+        <div class="contact" id="contact"></div>
 
     </div>
 
@@ -97,5 +100,8 @@
 
     {% endif %}
     <script src="{{ asset('assets/lightbox2-2.11.1/dist/js/lightbox.min.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('assets/js/showContact.js') }}"></script>
 
 {% endblock %}

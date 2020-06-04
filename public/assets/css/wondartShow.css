@@ -58,3 +58,17 @@
 p{
     text-align: center;
 }
+
+.contact{
+    display: none;
+    position: fixed;
+    right: -300px;
+    z-index: 1000;
+    background-color: #FFFFFF;
+    border-radius: 3px;
+    top: 50%;
+    transform: translate(50%, -50%);
+    width: auto;
+    box-shadow: 1px -1px 4px 3px grey;
+    padding: 1%;
+}

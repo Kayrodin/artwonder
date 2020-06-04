@@ -16,9 +16,15 @@ class MarcaAutorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre', TextType::class)
-            ->add('email',EmailType::class)
-            ->add('telefono', TelType::class)
+            ->add('nombre', TextType::class, [
+                'required' => true,
+            ])
+            ->add('email',EmailType::class, [
+                'required' => true,
+            ])
+            ->add('telefono', TelType::class, [
+                'required' => false,
+            ])
         ;
     }
 

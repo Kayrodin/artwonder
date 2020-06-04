@@ -1,29 +1,35 @@
-.contenedor{
-    width: auto;
-    border: 1px solid black;
-    border-radius: 10px;
-    position: absolute;
-    left: 50%;
-    top: 25%;
-    transform: translateX(-50%);
-    padding: 2%;
-    padding-bottom: 0;
-}
+/*.contenedor{*/
+/*    width: auto;*/
+/*    border: 1px solid black;*/
+/*    border-radius: 10px;*/
+/*    position: absolute;*/
+/*    left: 50%;*/
+/*    top: 25%;*/
+/*    transform: translateX(-50%);*/
+/*    padding: 2%;*/
+/*    padding-bottom: 0;*/
+/*}*/
 
-h1, h2{
+.contact h1, .contact h2{
     font-family: McLetter;
 }
 
-h1{
-    font-size: 30px;
+.contact h1{
+    font-size: 25px;
+    text-align: center;
 }
 
-h2{
-    font-size: 25px;
+.contact h2{
+    font-size: 20px;
 }
 
 .informacion{
     display: flex;
     flex-flow: column;
     align-items: center;
+}
+
+.btn{
+    box-shadow: 1px 1px 5px black;
+    margin-top: 10px;
 }
