@@ -8,6 +8,13 @@
 {% endblock %}
 
 {% block body %}
+
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-success flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <div id="menu-home">
             {% include 'navbar_home.html.twig' %}
@@ -42,6 +49,7 @@
     <script src="{{ asset('assets/js/infinite-scroll.js') }}"></script>
     <script src="{{ asset('assets/js/wondartBehavior.js') }}"></script>
     <script src="{{ asset('assets/js/homeBehavior.js') }}"></script>
+    <script src="{{ asset('assets/js/flashMessages.js') }}"></script>
 {#    <script src="{{ asset('assets/js/particles.js') }}"></script>#}
 {#    <script src="{{ asset('assets/js/app.js') }}"></script>#}
 {% endblock %}

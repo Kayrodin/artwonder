@@ -1,5 +1,5 @@
 easy_admin:
-    disabled_actions: ['edit', 'new']
+    disabled_actions: ['new']
     site_name: 'ArtWonder Administración'
     entities:
 #        # List the entity class name you want to manage
@@ -7,7 +7,11 @@ easy_admin:
 #        - App\Entity\Category
         Usuario:
             class: App\Entity\Usuario
+            edit:
+                fields:
+                    - { property: 'confirmed', icon: 'customer' }
         WondArts:
+            disabled_actions: ['edit']
             class: App\Entity\WondArt
     user:
         name_property_path: 'nombre'

@@ -66,11 +66,17 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
+        $confirmed = false;
         $user = $this->entityManager->getRepository(Usuario::class)->findOneBy(['email' => $credentials['email']]);
+        if ($user){
+            $confirmed = $user->getConfirmed();
+        }
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('No se ha podido encontrar esta cuenta');
+        }elseif (!$confirmed){
+            throw new CustomUserMessageAuthenticationException('Espere que su cuenta sea confirmada');
         }
 
         return $user;
@@ -103,7 +109,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         }else{
             return new RedirectResponse($this->urlGenerator->generate('home'));
         }
-        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+
     }
 
     protected function getLoginUrl()

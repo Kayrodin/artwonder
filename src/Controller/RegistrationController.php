@@ -55,15 +55,24 @@ class RegistrationController extends AbstractController
                 $marcaAnonima = new MarcaAutor();
                 $marcaAnonima->setNombre('ANONIMO');
                 $user->addMarca($marcaAnonima);
+                $user->setConfirmed(true);
             }
             if($rol == 0){
                 $user->setTipo('ROLE_AGENT');
+                $user->setConfirmed(false);
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
             // do anything else you need here, like send an email
+            if($rol == 0){
+                $this->addFlash(
+                    'notice',
+                    'Espere a que su cuenta sea confirmada'
+                );
+                return  $this->redirectToRoute('home');
+            }
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,

@@ -61,6 +61,11 @@ class Usuario implements UserInterface
      */
     private $marcas;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $confirmed;
+
     public function __construct()
     {
         $this->marcas = new ArrayCollection();
@@ -235,6 +240,18 @@ class Usuario implements UserInterface
                 $marca->setPropietario(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getConfirmed(): ?bool
+    {
+        return $this->confirmed;
+    }
+
+    public function setConfirmed(bool $confirmed): self
+    {
+        $this->confirmed = $confirmed;
 
         return $this;
     }

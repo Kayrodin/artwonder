@@ -91,10 +91,11 @@ class UsuarioController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$usuario->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $this->get('security.token_storage')->setToken(null);
             $entityManager->remove($usuario);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('usuario_index');
+        return $this->redirectToRoute('home');
     }
 }

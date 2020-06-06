@@ -41,7 +41,8 @@
 }
 
 .dropdown-menu{
-    left: -60%;
+    right: -20%;
+    left: unset;
 }
 
 @font-face {
