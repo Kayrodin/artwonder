@@ -82,4 +82,21 @@ class HomeController extends AbstractController
             ])->getContent() );
         return new JsonResponse($response);
     }
+
+    /**
+     * @Route("/help", name="help")
+     */
+    public function help(Request $request)
+    {
+        $user = 'Perfil';
+        $searchQuery = $request->get('query');
+        if ($this->getUser()){
+            $user = $this->getUser();
+        }
+
+        return $this->render('help.html.twig', [
+            'usuario' => $user,
+        ]);
+    }
+
 }

@@ -38,6 +38,15 @@ class MarcaAutorRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByName($name){
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.nombre = :nombre')
+            ->setParameter('nombre', $name)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 
     // /**
     //  * @return MarcaAutor[] Returns an array of MarcaAutor objects

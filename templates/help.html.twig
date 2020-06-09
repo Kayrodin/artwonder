@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Art Wonder{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/navLetter.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div id="menu-home">
+            {% include 'navbar_home.html.twig' %}
+        </div>
+    {% else %}
+        <div id="menu-home">
+            {% include 'navbar_home_anon.html.twig' %}
+        </div>
+    {% endif %}
+{#    <div id="particles-js"></div>#}
+
+    <br>
+
+    <div class="container">
+        <h1>Preguntas frecuentes y posibles respuestas para principiantes</h1>
+        {% if is_granted('ROLE_USER') %}
+            <h3><strong>¿Que es una Marca de Autor?</strong></h3>
+            <p>En nuestra plataforma las Marcas de Autor funcionan como un conjunto de datos de contacto para el uso de los agentes.
+                Si usted quiere a darse a conocer puede hacer uso de esta funcionalidad.</p>
+            <h3><strong>¿Como creo una Marca de Autor o un WondArt?</strong></h3>
+            <p>Es posible acceder a la sección de Marca de Autor o la de WondArt desde la opción Marcas o Wondarts en la barra
+                de navegación como se muestra en la imágen:</p>
+            <div><img src="{{ asset('assets/helpImages/SeccMarcas.PNG') }}" alt="No se ha podido cargar la imagen"></div>
+            <br>
+            <p>Desde ahí puede usar el botón Nueva Marca para crear su Marca de Autor personalizada o Nuevo WondArt para crear su nuevo wondart.</p>
+            <h3><strong>¿Que es un WondArt?</strong></h3>
+            <p>Un wondart es una imagen que puede ser objeto de publicación, dicha imágen se considera arte original.</p>
+            <h5>¿Que son las etiquetas del WondArt?</h5>
+            <p>Usted puede agregar etiquetas a su wondart con fin de que aparezca en la búsqueda de otros usuarios, agentes o visitantes,
+                asegurese de agregar todas las palabras claves por las cuáles desea que su wondart sea resultado de la búsqueda.</p>
+            <h5>¿Que pasa si publico un WondArt?</h5>
+            <p>Al publicar un WondArt este será visible y accesible desde la Sección de Inicio, la marca con la que se publicó será visible para
+                los agentes registrados y desde luego se mostrará su imagen con una marca de agua para todos excepto para el propietario de dicho wondart.
+                También podrá ser Comentado.
+                El Autor del WondArt se reserva el derecho de Ocultar un WondArt ya publicado.</p>
+
+        {% elseif is_granted('ROLE_AGENT') or is_granted('ROLE_ADMIN') %}
+
+            <h3><strong>¿Como accedo a los datos de contacto de un usuario?</strong></h3>
+            <p>Puede acceder a los datos de contacto de un wondart desde el botón contacto que solo estará disponible para las marcas no anónimas.
+                Para acceder a un wondart haga click en el wondart desde el menú Inicio. En la siguiente imagén se muestra la ubicación del botón de Contacto:</p>
+            <div><img src="{{ asset('assets/helpImages/Contacto.PNG') }}" alt="No se ha podido cargar la imagen"></div>
+            <br>
+            <h3><strong>¿Que hago si la Marca de Autor no tiene datos reales?</strong></h3>
+            <p>No se lleva un control de los datos de contacto de los Usuarios, por nuestra política se considera que los usuarios deben llevar su propio control
+                de Marcas, solo aseguramos que no existan dos Marcas de Autor iguales. Si usted no logra contactar con un usuario informe acerca de ello y
+                haremos lo posible por ponernos en contacto.</p>
+
+        {% else %}
+            <h3><strong>¿Como me registro en ArtWonder?</strong></h3>
+            <p>Es posible comenzar el registro a través de la opción de registro en la barra de navegación:</p>
+            <div><img src="{{ asset('assets/helpImages/barraRegistro.PNG') }}" alt="No se ha podido cargar la imagen"></div>
+            <br>
+            <h5>¿Que rol elijo?</h5>
+            <p>El rol que recomendamos es el de usuario común de la aplicación siempre que desee usted almacenar, publicar imágenes y dar a conocer
+                su trabajo a las empresas registradas.</p>
+            <h5>¿Y si soy parte de una empresa?</h5>
+            <p>Si usted es parte de una empresa y busca contratar artistas, entonces recomendamos el rol de agente. Este rol habilita la posibilidad de
+                ver los datos de contacto de los usuarios registrados. Una vez registrado usted deberá ponerse en contacto con nosotros para verificar su
+                persona. Una vez se verifique que todos los datos son correctos, su cuenta será habilitada por nuestros técnicos.</p>
+        {% endif %}
+        <h3><strong>¿Que hago en caso de Errores?</strong></h3>
+         <p>Le agradeceríamos que contacte con nosotros y aporte información sobre dicho error.</p>
+        <h3><strong>¿Donde puedo contactar con un administrador?</strong></h3>
+         <p>Puede contactarnos a través de nuestro telefono (xx)-xxxxxxxxxx o escribirnos un correo a la dirección serviciocliente@artwonder.com</p>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="https://kit.fontawesome.com/a076d05399.js"></script>
+{#    <script src="{{ asset('assets/js/particles.js') }}"></script>#}
+{#    <script src="{{ asset('assets/js/app.js') }}"></script>#}
+{% endblock %}

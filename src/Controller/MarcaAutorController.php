@@ -52,14 +52,24 @@ class MarcaAutorController extends AbstractController
             $marcaAutor->setPropietario($user);
             $marcaAutor->setNombre(strtoupper($marcaAutor->getNombre()));
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($marcaAutor);
-            $entityManager->flush();
 
-            $this->addFlash(
-                'notice',
-                'Se ha creado una nueva marca de autor'
-            );
-            return $this->redirectToRoute('marca_autor_index');
+            if($entityManager->getRepository(MarcaAutor::class)->findByName($marcaAutor->getNombre())){
+                $this->addFlash(
+                    'notice',
+                    'Ya existe esta Marca de Autor'
+                );
+                return $this->redirectToRoute('marca_autor_index');
+            }else{
+                $entityManager->persist($marcaAutor);
+                $entityManager->flush();
+
+                $this->addFlash(
+                    'notice',
+                    'Se ha creado una nueva marca de autor'
+                );
+                return $this->redirectToRoute('marca_autor_index');
+            }
+
         }
 
         $response = array(
@@ -107,7 +117,14 @@ class MarcaAutorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $marcaAutor->setNombre(strtoupper($marcaAutor->getNombre()));
+            if($this->getDoctrine()->getRepository(MarcaAutor::class)->findByName($marcaAutor->getNombre())){
+                $this->addFlash(
+                    'notice',
+                    'Ya existe esta Marca de Autor'
+                );
+                return $this->redirectToRoute('marca_autor_index');
+            }else{
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash(
@@ -116,6 +133,7 @@ class MarcaAutorController extends AbstractController
             );
 
             return $this->redirectToRoute('marca_autor_index');
+            }
         }
 
         $response = array(
